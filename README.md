@@ -68,7 +68,7 @@ Recomendor basado en varios aspectos: Música que escuchan tus "amigos", música
 Por tanto se trata de un recomendador tanto acumulativo como colaborativo.
 
 ##### Tipo de producto que recomienda
-Recomienda música, tanto canciones en particular como artistas más en general
+Recomienda música, tanto canciones en particular como artistas más en general. También recomienda listas de reproducción de música.
 
 ##### Técnicas que utiliza y características
 
@@ -96,7 +96,3 @@ No sé que quieren en este apartado algún dibujillo o algo supongo.
 ##### Diseño interno
 
 Sobre el comportamiento interno del sistema (similitud, filtrado, ..) también se pueden dar ideas del comportamiento (more like this,..)
-
-
-
-
