@@ -9,7 +9,7 @@ Las "almas gemelas en filmaffinity" son aquellas que ha votado películas en com
 
 
 ##### Tipo de producto que recomienda
-Recomienda películas para ver. Señalar que no vende los productos de recomienda. 
+Recomienda películas para ver que aún no has visto. Señalar que no vende los productos de recomienda. 
 
 ##### Técnicas que utiliza
 
@@ -19,7 +19,7 @@ Recomienda películas para ver. Señalar que no vende los productos de recomiend
 
 ##### Ventajas e inconvenientes
 
-- Está fuertemente orientado a `recomendadores colaborativos+`, por lo que se puede hacer pesado, o difícil entontrar una película por tema. Es decir por acción, comedia, histórica, ciencia-ficción, de culto etc. 
+- Está fuertemente orientado a `recomendadores colaborativos+`, por lo que se puede hacer pesado, o difícil entontrar una película por tema (umm... pero se puede filtrar los resultado por género y décadas). Es decir por acción, comedia, histórica, ciencia-ficción, de culto etc. 
 
 - No está pensado para explorar películas sin más, como hace el Spoty, por ejemplo. 
 
@@ -30,6 +30,7 @@ Recomendador basado en el perfil de usuario y va aprendiendo de tus preferencias
 Es un método de recomendador basado en la consulta acumulativa.
 
 ##### Tipo de producto que recomienda
+Recomienda ofertas de trabajo que encajan con tu perfil, lo que buscas y lo que más te gusta.
 
 ##### Técnicas que utiliza
 - Filtrado exacto. (Lo contrario a Nearest Neighbout)
@@ -46,14 +47,18 @@ preguntas directas o escalas sobre gustos,.. o
 
 No conozco el recomendador y no sé cuál usa
 
+Yo diría que es de elementos explícitos, pero lo miramos luego, XD
 
 ##### Ventajas e inconvenientes
+
+
 
 ###Recomendador de música en Spotify, pestaña Descubrir
 Recomendor basado en varios aspectos: Música que escuchan tus "amigos", música que has escuchado y estilos similares, gente que escucha tus artistas los artistas que también escuchan, música que escuchabas y hace tiempo que no lo haces.
 Por tanto se trata de un recomendador tanto acumulativo como colaborativo.
 
 ##### Tipo de producto que recomienda
+Recomienda música, tanto canciones en particular como artistas más en general
 
 ##### Técnicas que utiliza
 
