@@ -9,7 +9,7 @@ Las "almas gemelas en filmaffinity" son aquellas que ha votado películas en com
 
 
 ##### Tipo de producto que recomienda
-Recomienda películas para ver. Señalar que no vende los productos de recomienda. 
+Recomienda películas para ver que aún no has visto. Señalar que no vende los productos de recomienda. 
 
 ##### Técnicas que utiliza y características
 
@@ -27,17 +27,18 @@ Recomienda películas para ver. Señalar que no vende los productos de recomiend
 
 ##### Ventajas e inconvenientes
 
-- El `filtrado colaborativo` solo tiene en cuenta el rating de otros usuarios para hacer la función de similitud y el filtrado de los usuarios parecidos a ti. Se puede hacer pesado o difícil entoncontrar una película por otros criterios como acción, comedia, histórica, ciencia-ficción, de culto etc. Ya que no se puede buscar explicitamente por estas carasterísticas en el recomendador.  
+
+- El `filtrado colaborativo` solo tiene en cuenta el rating de otros usuarios para hacer la función de similitud y el filtrado de los usuarios parecidos a ti. Se puede hacer pesado o difícil entoncontrar una película por otros criterios como acción, comedia, histórica, ciencia-ficción, de culto etc. Ya que no se puede buscar explicitamente por estas carasterísticas en el recomendador. Aunque se puede filtrar los reultados por género y décadas 
+
 
 - No está pensado para explorar películas sin más, como hace el Spoty, por ejemplo. 
-
-
 
 ###Recomendador de empleo de Job and Talent
 Recomendador basado en el perfil de usuario y va aprendiendo de tus preferencias en las ofertas de empleo que marcas como "favoritas" o las descartas porque no te interesan.
 Es un método de recomendador basado en la consulta acumulativa.
 
 ##### Tipo de producto que recomienda
+Recomienda ofertas de trabajo que encajan con tu perfil, lo que buscas y lo que más te gusta.
 
 ##### Técnicas que utiliza y características
 
@@ -53,7 +54,9 @@ Es un método de recomendador basado en la consulta acumulativa.
 - con econ elementos implícitos como observación (qué productos mira y durante cuánto tiempo, qué compra,..e lementos explícitos como
 preguntas directas o escalas sobre gustos,.. o 
 
-No conozco el recomendador y no sé cuál usa
+> No conozco el recomendador y no sé cuál usa
+
+>> Yo diría que es de elementos explícitos, pero lo miramos luego, XD
 
 - Por la `forma de interacción de interaccion` el recomendador es ... (**Elegir single shot , conversacional  o mixto entre los dos **) 
 
@@ -65,6 +68,7 @@ Recomendor basado en varios aspectos: Música que escuchan tus "amigos", música
 Por tanto se trata de un recomendador tanto acumulativo como colaborativo.
 
 ##### Tipo de producto que recomienda
+Recomienda música, tanto canciones en particular como artistas más en general
 
 ##### Técnicas que utiliza y características
 
