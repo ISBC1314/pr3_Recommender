@@ -73,7 +73,8 @@ Recomienda música, tanto canciones en particular como artistas más en general.
 ##### Ventajas e inconvenientes
 
 - Por la `forma de interacción` el recomendador es ... (**Elegir single shot , conversacional o mixto entre los dos **) 
->>Yo diría que es conversacional, similar al de filmaffinity, porque te recomienda en base a lo que el cree sin preguntarte ni nada.
+
+>Yo diría que es conversacional, similar al de filmaffinity, porque te recomienda en base a lo que el cree sin preguntarte ni nada.
 
 ## Diseñar un sistema de recomendacion de viviendas
 
@@ -92,7 +93,7 @@ Las tecnicas de recomentación para el recomendador de viviendas podrían ser:
 
 3. Combinar las dos anteriores.
 
->>Por mi experiencia buscando viviendas, pondría un formulario base (lugar, tipo, y precio) A partir de ese formulario mostraría recomendaciones que se ajusten a esas 3 características básicas de distintos estilos el método de proponer y criticar, empezar a "filtrar" esos resultados. 
+>Por mi experiencia buscando viviendas, pondría un formulario base (lugar, tipo, y precio) A partir de ese formulario mostraría recomendaciones que se ajusten a esas 3 características básicas de distintos estilos el método de proponer y criticar, empezar a "filtrar" esos resultados. 
 >>En cierto sentido podría "aprender" en el sentido, si he visto que ha visto 5 viviendas y de ellas 4 tenían terraza, vamos a priorizar que tenga terraza.
 >>También estaría guay, recomendar viviendas lo típico de "por 50€ más tambien tiene esto", para así fomentar una compra..., es decir, relajar el criterio del precio si observas que lo que le ofreces al usuario le va a gustar
 >>Lo del conocimiento de otros usuarios no me gusta nada!!!!
@@ -100,7 +101,7 @@ Las tecnicas de recomentación para el recomendador de viviendas podrían ser:
 #### Diseñar la interacción con el sistema.
 
 No sé que quieren en este apartado algún dibujillo o algo supongo. 
->>En que parte del guión ponen este punto?
+>En que parte del guión ponen este punto?
 
 ##### Diseño interno
 
