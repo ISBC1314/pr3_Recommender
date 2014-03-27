@@ -85,30 +85,41 @@ Enumerar también las características del recomendador.
 
 Las técnicas de recomendación para el recomendador de viviendas podrían ser:
 
-1. Técnicas de filtrado de información usando la aproximación basada en contenido, ya que al ser un caso de recomendar una vivienda se haría un formulario donde el usuario pueda elegir aquellos aspectos que desearía que la vivienda tuviera/no tuviera.
+El sistema se iniciará con una primer formulario con 2 campos principales, lugar y precio de la vivienda, a partir de ahí el sistema recomendará una serie de viviendas que se ajusten a esas carácterísticas.
+Una vez mostradas estas viviendas, el usuario tendrá la opcion de:
+1. seleccionar aquellas que más le gusten, y el recomendador propondrá más viviendas en referencia a esas mediante el metodo proposing
+2. establecer mas filtros a esa busqueda, y el recomendador porpondrá más viviendas que se ajusten a dichos filtros
+
+Por tanto, las tecnicas que vamos a utilizar son las siguientes:
+
+1. Tecnica conversacional
+2. Tecnica filtering
+3. Tecnica filling
+4. Tecnica proposing
+
+También nos planteamos añadir más técnicas al diseño para optimizarlo, en caso de que nos den tiempo a desarrollarlas:
+- Añadir un lista tabu con aquellas viviendas que el usuario ya ha seleccionado que no le gustan, por tanto no se volverían a mostrar.
+- Aplicar una funcion de similitud con consultas anteriores, para así recomendar las viviendas que más se ajusten a la persona que está buscando
+- Aprender de la sesion del usuario, para así recomendar viviendas que más se ajusten a las viviendas que el usuario a marcado como sus favoritas. En este caso guardaría informacion de las características de las viviendas que el usuario ha visitado y no ha descartado, para así fijarse en que características le gusta al usuario en una vivienda y priorizar viviendas con estas características sobre otras que  no las tengan.
+- Relajacion de algún parámetro de consulta, como el precio, si se ajusta mucho más a lo que busca el usuario.
+
+Por tanto, las posibles tecnicas a añadir al diseño ya descrito son las siguientes: 
+
+1. Lista tabu
+2. similitud
+3. Aprender de la sesion
+4. Relajar filtros
+
+La conversación con el sistema terminará cuando el usuario cierre la sesión o seleccione una vivienda para quedarsela.
+
+No pretendemos guardar información del perfil de usuario, puesto que un mismo usuario, podría querer realizar diversas búsquedas y a la vez dispares entre sí
 	
-	La forma de interacción que podríamos elegir es la de Single Shot, es decir, con consulta. Ya que el usuario haría una consulta, el recomendador le propondría una serie de productos y el usuario elige la que le guste o se sale.
-
-2. Otra técnica distinta podría ser la de antes pero esta vez sin hacer una consulta proponer varias viviendas de varios estilos ya que habrá usuarios que no tengan las ideas tan claras y quieran ver variedad para poder luego elegir.
-
-3. Combinar las dos anteriores.
-
-4. Creo que deberíamos descartar el filtrado colaborativo. Las casas no sé pueden recomendar como se recomiendan pelis o libros porque las casas son solo para una persona. (que la compra o alquila) no se pueden compartir ni recomendar. 
-
-5. Quizás podríamos hacer un perfil de usuario, donde guardásemos cosas generales com ola ciudad donde quiere buscar la vivienda y el rango de precios donde la quiere. Todo muy general nada particular pero así no tendría que poner esos datos cada vez que haga la consulta. Y en ese perfil de usuario podriamos guardar las casas vistas anteriormente o una seccion de casas favoritas que nos ayudaria a aprender de los gustos del comprador.  
-
->Por mi experiencia buscando viviendas, pondría un formulario base (lugar, tipo, y precio) A partir de ese formulario mostraría recomendaciones que se ajusten a esas 3 características básicas de distintos estilos el método de proponer y criticar, empezar a "filtrar" esos resultados. 
->>En cierto sentido podría "aprender" en el sentido, si he visto que ha visto 5 viviendas y de ellas 4 tenían terraza, vamos a priorizar que tenga terraza.
->>También estaría guay, recomendar viviendas lo típico de "por 50€ más tambien tiene esto", para así fomentar una compra..., es decir, relajar el criterio del precio si observas que lo que le ofreces al usuario le va a gustar
->>Lo del conocimiento de otros usuarios no me gusta nada!!!!
->>>> Lo de aprender cosas como que le gusta la terraza porque ha visto algunas con terraza me gusta. Voto por ponerlo
 
 #### Diseñar la interacción con el sistema.
 
-No sé que quieren en este apartado algún dibujillo o algo supongo. 
->En que parte del guión ponen este punto?
->> En las trasparencias está el enunciado y los puntos que hay que rellenar y como lo quieren y eso. He sacado estas secciones de las traspas 
+>Aquí meteis luego el dibujito =D.
 
 #### Diseño interno
 
+> Creo que más o menos lo he redactado arriba
 Sobre el comportamiento interno del sistema (similitud, filtrado, ..) también se pueden dar ideas del comportamiento (more like this,..)
