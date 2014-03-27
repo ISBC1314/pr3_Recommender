@@ -42,18 +42,17 @@ Recomienda ofertas de trabajo que encajan con tu perfil, lo que buscas y lo que 
 
 ##### Técnicas que utiliza y características
 
-- Filtrado exacto. (Lo contrario a Nearest Neighbout)
-
-- En un recomendador basado en `perfiles de usuario`
+- Es un recomendador basado en `perfiles de usuario`
 	- Basado en características personales: edad, sexo, zona residencia, estudios cursador, experiencia laboral anterior
-	- Basado en sus gustos, preferencias generales,.. Evaluaciones (ratings) hechas sobre los items(ofertas de trabajo).
+	- Basado en sus gustos, preferencias generales que son en su mayoría evaluaciones (ratings) hechas sobre las ofertas de trabajo.
 
-- Dentro de recomendador de perfiles de usuario, este tipo de recomendador es de `elementos explicitos`, puesto que está basado en las respuestas directas que el usuario hace una seleccion de las ofertas como favoritas o descartadas.
+- Dentro de recomendador de perfiles de usuario, este tipo de `recomendador explicito`, puesto que está basado en las respuestas directas que el usuario hace una seleccion de las ofertas como favoritas o descartadas. Sin embargo también tiene elementos de `recomendador implícito` puesto que una vez hecho el perfil el recomendador va aprendiendo de las ofertas que marcas como favoritas o descartadas, aunque no te envía otras recomendaciones diferentes.  
+
+- Por la `forma de interacción de interaccion` el recomendador es se considera `single-shot`, puesto que en base al formulario que rellenas con tu curriculum te envían las ofertas de trabajo.
 
 ##### Ventajas e inconvenientes
 
-- Por la `forma de interacción de interaccion` el recomendador es se considera `single-shot`, puesto que en base al formulario que rellenas con tu curriculum te envían las ofertas de trabajo. Además de que luego va aprendiendo de las ofertas que marcas como favoritas o descartadas, pero no te envía otras recomendaciones diferentes.
-Lo positivo de este tipo de recomendación es que para este caso, no te satura con ofertas de trabajo que realmente no te interesan, por otra lado, no te condiciona mucho tu perfil, y para obtener otro tipo de ofertas tendrías que buscarlas a través del buscado.
+Lo positivo de la recomendación `single shot` es que para este caso, no te satura con ofertas de trabajo que realmente no te interesan. Por otro lado, no condiciona mucho tu perfil, y para obtener otro tipo de ofertas tendrías que buscarlas a través del buscador.
 
 
 ###Recomendador de música en Spotify, pestaña Descubrir
@@ -69,40 +68,47 @@ Recomienda música, tanto canciones en particular como artistas más en general.
 
 - Las canciones y los artistas tienen ratings eso también se usa a la hora de recomendar. `filtrado colaborativo` 
 
-
-##### Ventajas e inconvenientes
-
 - Por la `forma de interacción` el recomendador es ... (**Elegir single shot , conversacional o mixto entre los dos **) 
 
 >Yo diría que es conversacional, similar al de filmaffinity, porque te recomienda en base a lo que el cree sin preguntarte ni nada.
 
+
+##### Ventajas e inconvenientes
+
+
 ## Diseñar un sistema de recomendacion de viviendas
 
-##### Técnicas de recomendación
+#### Técnicas de recomendación
 
 Enumerar las técnicas de recomendación que va a usar nuestro recomendador. Necesitamos 3 al menos. Pero lo ideal sería tener 4 o 5 diferentes por lo que han dicho en clase. 
 Enumerar también las características del recomendador. 
 
-Las tecnicas de recomentación para el recomendador de viviendas podrían ser:
+Las técnicas de recomendación para el recomendador de viviendas podrían ser:
 
-1. Tecnicas de filtrado de información usando la aproximación basada en contenido, ya que al ser un caso de recomendar una vivienda se haría un formulario donde el usuario pueda elegir aquellos aspectos que desearía que la vivienda tuviera/no tuviera.
+1. Técnicas de filtrado de información usando la aproximación basada en contenido, ya que al ser un caso de recomendar una vivienda se haría un formulario donde el usuario pueda elegir aquellos aspectos que desearía que la vivienda tuviera/no tuviera.
 	
 	La forma de interacción que podríamos elegir es la de Single Shot, es decir, con consulta. Ya que el usuario haría una consulta, el recomendador le propondría una serie de productos y el usuario elige la que le guste o se sale.
 
-2. Otra tecnica distinta podría ser la de antes pero esta vez sin hacer una consulta proponer varias viviendas de varios estilos ya que habrá usuarios que no tengan las ideas tan claras y quieran ver variedad para poder luego elegir.
+2. Otra técnica distinta podría ser la de antes pero esta vez sin hacer una consulta proponer varias viviendas de varios estilos ya que habrá usuarios que no tengan las ideas tan claras y quieran ver variedad para poder luego elegir.
 
 3. Combinar las dos anteriores.
+
+4. Creo que deberíamos descartar el filtrado colaborativo. Las casas no sé pueden recomendar como se recomiendan pelis o libros porque las casas son solo para una persona. (que la compra o alquila) no se pueden compartir ni recomendar. 
+
+5. Quizás podríamos hacer un perfil de usuario, donde guardásemos cosas generales com ola ciudad donde quiere buscar la vivienda y el rango de precios donde la quiere. Todo muy general nada particular pero así no tendría que poner esos datos cada vez que haga la consulta. Y en ese perfil de usuario podriamos guardar las casas vistas anteriormente o una seccion de casas favoritas que nos ayudaria a aprender de los gustos del comprador.  
 
 >Por mi experiencia buscando viviendas, pondría un formulario base (lugar, tipo, y precio) A partir de ese formulario mostraría recomendaciones que se ajusten a esas 3 características básicas de distintos estilos el método de proponer y criticar, empezar a "filtrar" esos resultados. 
 >>En cierto sentido podría "aprender" en el sentido, si he visto que ha visto 5 viviendas y de ellas 4 tenían terraza, vamos a priorizar que tenga terraza.
 >>También estaría guay, recomendar viviendas lo típico de "por 50€ más tambien tiene esto", para así fomentar una compra..., es decir, relajar el criterio del precio si observas que lo que le ofreces al usuario le va a gustar
 >>Lo del conocimiento de otros usuarios no me gusta nada!!!!
+>>>> Lo de aprender cosas como que le gusta la terraza porque ha visto algunas con terraza me gusta. Voto por ponerlo
 
 #### Diseñar la interacción con el sistema.
 
 No sé que quieren en este apartado algún dibujillo o algo supongo. 
 >En que parte del guión ponen este punto?
+>> En las trasparencias está el enunciado y los puntos que hay que rellenar y como lo quieren y eso. He sacado estas secciones de las traspas 
 
-##### Diseño interno
+#### Diseño interno
 
 Sobre el comportamiento interno del sistema (similitud, filtrado, ..) también se pueden dar ideas del comportamiento (more like this,..)
