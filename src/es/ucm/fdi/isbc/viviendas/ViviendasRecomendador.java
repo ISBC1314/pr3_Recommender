@@ -3,6 +3,7 @@ package es.ucm.fdi.isbc.viviendas;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import es.ucm.fdi.isbc.viviendas.representacion.Coordenada;
 import es.ucm.fdi.isbc.viviendas.representacion.DescripcionVivienda;
 import jcolibri.casebase.LinealCaseBase;
 import jcolibri.cbraplications.StandardCBRApplication;
@@ -13,12 +14,16 @@ import jcolibri.cbrcore.CBRQuery;
 import jcolibri.cbrcore.Connector;
 import jcolibri.exception.ExecutionException;
 import jcolibri.extensions.recommendation.casesDisplay.DisplayCasesTableMethod;
+import jcolibri.extensions.recommendation.casesDisplay.UserChoice;
+import jcolibri.extensions.recommendation.conditionals.BuyOrQuit;
 import jcolibri.method.retrieve.RetrievalResult;
 import jcolibri.method.retrieve.NNretrieval.NNConfig;
 import jcolibri.method.retrieve.NNretrieval.NNScoringMethod;
 import jcolibri.method.retrieve.NNretrieval.similarity.global.Average;
 import jcolibri.method.retrieve.NNretrieval.similarity.local.Equal;
 import jcolibri.method.retrieve.NNretrieval.similarity.local.Interval;
+import jcolibri.method.retrieve.NNretrieval.similarity.local.recommenders.InrecaLessIsBetter;
+import jcolibri.method.retrieve.NNretrieval.similarity.local.recommenders.McSherryMoreIsBetter;
 import jcolibri.method.retrieve.selection.SelectCases;
 
 
@@ -61,15 +66,16 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		simConfig.setDescriptionSimFunction(new Average());
 		
 		//Fijamos las funciones de similitud locales
-		//simConfig.addMapping(new Attribute("Localizacion",  DescripcionViviendaAux.class), new Equal());
 		simConfig.addMapping(new Attribute("tipo",  DescripcionVivienda.class), new Equal());
-		simConfig.addMapping(new Attribute("superficie",  DescripcionVivienda.class), new Interval(50));
-		simConfig.addMapping(new Attribute("habitaciones",  DescripcionVivienda.class), new Interval(2));
-		simConfig.addMapping(new Attribute("banios", DescripcionVivienda.class), new Interval(2));
+		simConfig.addMapping(new Attribute("superficie",  DescripcionVivienda.class), new McSherryMoreIsBetter(7,1));
+		simConfig.addMapping(new Attribute("habitaciones",  DescripcionVivienda.class), new McSherryMoreIsBetter(0,0));
+		simConfig.addMapping(new Attribute("banios", DescripcionVivienda.class), new McSherryMoreIsBetter(0,0));
+		simConfig.addMapping(new Attribute("precio", DescripcionVivienda.class), new InrecaLessIsBetter(2000, 0.5));
+		simConfig.addMapping(new Attribute("coordenada", DescripcionVivienda.class),  new Equal());
 		
 		//Es posible modificar el peso de cada atributo en la media ponderada
 		//Por defecto el peso es 1
-		//simConfig.setWeight(new Attribute("Localizacion", TravelDescription.class), 0.5);
+		//simConfig.setWeight(new Attribute("localizacion", TravelDescription.class), 0.5);
 		
 		//Ejecutamos la recuperacio por el vecino mas proximo
 		Collection<RetrievalResult> eval = NNScoringMethod.evaluateSimilarity(_caseBase.getCases(),  query, simConfig);
@@ -100,8 +106,6 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 	
 	public static void main(String[] args) {
 		
-		System.out.println("Ini recomendador");
-		
 		//Crear el objeto que implementa la aplicacion CBR
 		ViviendasRecomendador trApp = new ViviendasRecomendador();
 		
@@ -114,8 +118,8 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 			
 			//Crear Descripcion vivienda
 			DescripcionVivienda des = new DescripcionVivienda(1);
-			des.setBanios(2);
-			des.setHabitaciones(3);
+			des.setPrecio(200000);
+			
 			
 			//Crear objeto que almacena la consulta
 			CBRQuery query = new CBRQuery();
@@ -129,10 +133,5 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		{
 			org.apache.commons.logging.LogFactory.getLog(ViviendasRecomendador.class).error(e);
 		}
-		
-		System.out.println("Fin recomendador");
-		
 	}
-
-
 }

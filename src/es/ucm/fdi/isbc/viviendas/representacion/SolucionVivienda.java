@@ -39,4 +39,13 @@ public class SolucionVivienda implements CaseComponent {
 		return new Attribute("id", SolucionVivienda.class);
 	}
 
+
+
+	@Override
+	public String toString() {
+		return "SolucionVivienda [id=" + id + ", precio=" + precio + "]";
+	}
+	
+	
+
 }

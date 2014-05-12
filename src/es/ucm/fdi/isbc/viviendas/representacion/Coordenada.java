@@ -37,6 +37,11 @@ public class Coordenada {
 	public void setLongitud(double longitud) {
 		this.longitud = longitud;
 	}
+
+	@Override
+	public String toString() {
+		return "Coordenada [latitud=" + latitud + ", longitud=" + longitud + "]";
+	}
 	
 	
 }

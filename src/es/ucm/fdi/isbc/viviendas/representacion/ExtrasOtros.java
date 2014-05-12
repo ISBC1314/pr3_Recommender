@@ -38,13 +38,16 @@ public class ExtrasOtros implements CaseComponent {
 		this.piscina = Boolean.valueOf(values[9]);
 	}
 	
+	
+	
 	@Override
 	public String toString() {
-		return id+","+ patio + "," + balcon + "," + zonaDeportiva + ","
-				+ zonaComunitaria + "," + terraza + "," + piscinaComunitaria
-				+ "," + jardinPrivado + "," + zonaInfantil + "," + piscina;
+		return "ExtrasOtros [id=" + id + ", patio=" + patio + ", balcon=" + balcon + ", zonaDeportiva=" + zonaDeportiva
+				+ ", zonaComunitaria=" + zonaComunitaria + ", terraza=" + terraza + ", piscinaComunitaria="
+				+ piscinaComunitaria + ", jardinPrivado=" + jardinPrivado + ", zonaInfantil=" + zonaInfantil
+				+ ", piscina=" + piscina + "]";
 	}
-	
+
 	@Override
 	public Attribute getIdAttribute() {
 		return new Attribute("id", DescripcionVivienda.class);
