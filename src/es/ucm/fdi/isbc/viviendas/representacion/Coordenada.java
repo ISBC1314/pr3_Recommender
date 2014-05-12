@@ -2,12 +2,15 @@ package es.ucm.fdi.isbc.viviendas.representacion;
 
 public class Coordenada {
 
-	public Coordenada(){
-		
-	}
+	
 	
 	double latitud;
 	double longitud;
+	
+	public Coordenada(){
+		latitud = 0.0;
+		longitud = 0.0;
+	}
 	
 	/**
 	 * @param latitud

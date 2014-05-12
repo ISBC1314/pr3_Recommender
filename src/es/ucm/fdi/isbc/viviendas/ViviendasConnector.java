@@ -79,11 +79,11 @@ public class ViviendasConnector implements Connector {
 	 * Testing method
 	 * @param args
 	 */
-	public static void main(String[] args){
+	/*public static void main(String[] args){
 		ViviendasConnector vc = new ViviendasConnector();
 		Collection<CBRCase> cases = vc.retrieveAllCases();
 		for(CBRCase c : cases)
 			System.out.println(c);
-	}
+	}*/
 
 }

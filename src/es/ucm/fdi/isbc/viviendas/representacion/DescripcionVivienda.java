@@ -7,8 +7,6 @@ public class DescripcionVivienda implements CaseComponent{
 
 	public enum TipoVivienda {Atico, Plantabaja, Piso, Loft, Casaadosada, CasaChalet, Duplex, Estudio, Fincarustica, Apartamento}
 	public enum EstadoVivienda { Muybien, Reformado, Areformar, Casinuevo, Bien};
-		
-	EstadoVivienda e = EstadoVivienda.Muybien;
 	
 	Integer id;
 	
@@ -25,16 +23,16 @@ public class DescripcionVivienda implements CaseComponent{
 	EstadoVivienda estado;
 	String descripcion;
 	
-	Coordenada coordenada;
+	//Coordenada coordenada;
 	
 	Integer precio;
 	Integer precioMedio;
 	Integer precioZona;
 	
 	
-	ExtrasFinca extrasFinca;
-	ExtrasBasicos extrasBasicos;
-	ExtrasOtros extrasOtros;
+	//ExtrasFinca extrasFinca;
+	//ExtrasBasicos extrasBasicos;
+	//ExtrasOtros extrasOtros;
 	
 	
 	public DescripcionVivienda(int id)
@@ -43,7 +41,8 @@ public class DescripcionVivienda implements CaseComponent{
 		this.id = id;
 	}
 	
-	public DescripcionVivienda (String stringRep)
+	
+	public DescripcionVivienda(String stringRep)
 	{
 		String[] values = stringRep.split("#");
 		id = Integer.valueOf(values[0]);
@@ -59,16 +58,16 @@ public class DescripcionVivienda implements CaseComponent{
 		banios= Integer.valueOf(values[8]);
 		estado= EstadoVivienda.valueOf(values[9]);
 		
-		coordenada = new Coordenada(Double.valueOf(values[10]),Double.valueOf(values[11]));
+		//coordenada = new Coordenada(Double.valueOf(values[10]),Double.valueOf(values[11]));
 			
 		precio= Integer.valueOf(values[12]);
 		precioMedio= Integer.valueOf(values[13]);
 		precioZona= Integer.valueOf(values[14]);
 		
 		
-		extrasFinca= new ExtrasFinca(values[15]);
-		extrasBasicos= new ExtrasBasicos(values[16]);
-		extrasOtros= new ExtrasOtros(values[17]);
+		//extrasFinca= new ExtrasFinca(values[15]);
+		//extrasBasicos= new ExtrasBasicos(values[16]);
+		//extrasOtros= new ExtrasOtros(values[17]);
 		
 		descripcion = values[18];
 
@@ -86,14 +85,14 @@ public class DescripcionVivienda implements CaseComponent{
 				habitaciones + "#" + 
 				banios + "#" + 
 				estado + "#" +
-				coordenada.getLatitud() + "#" +
-				coordenada.getLongitud() + "#" + 
+				//coordenada.getLatitud() + "#" +
+				//coordenada.getLongitud() + "#" + 
 				precio + "#" +
 				precioMedio + "#" + 
 				precioZona + "#" +
-				extrasFinca + "#" + 
-				extrasBasicos + "#" + 
-				extrasOtros + "#" +
+				//extrasFinca + "#" + 
+				//extrasBasicos + "#" + 
+				//extrasOtros + "#" +
 				descripcion.replace('#', ' '); 
 	}
 	
@@ -115,7 +114,7 @@ public class DescripcionVivienda implements CaseComponent{
 		this.tipo = tipo;
 	}
 
-	public ExtrasFinca getExtrasFinca() {
+	/*public ExtrasFinca getExtrasFinca() {
 		return extrasFinca;
 	}
 	public void setExtrasFinca(ExtrasFinca extrasFinca) {
@@ -132,19 +131,20 @@ public class DescripcionVivienda implements CaseComponent{
 	}
 	public void setExtrasOtros(ExtrasOtros extrasOtros) {
 		this.extrasOtros = extrasOtros;
-	}
+	}*/
+	
 	public String getLocalizacion() {
 		return localizacion;
 	}
 	public void setLocalizacion(String localizacion) {
 		this.localizacion = localizacion;
 	}
-	public Coordenada getCoordenada() {
+	/*public Coordenada getCoordenada() {
 		return coordenada;
 	}
 	public void setCoordenada(Coordenada coordenada) {
 		this.coordenada = coordenada;
-	}
+	}*/
 
 	public String getTitulo() {
 		return titulo;
@@ -218,11 +218,5 @@ public class DescripcionVivienda implements CaseComponent{
 	public Attribute getIdAttribute() {
 		return new Attribute("id", DescripcionVivienda.class);
 	}
-	
-	
-	
-	
-	
-	
 	
 }
