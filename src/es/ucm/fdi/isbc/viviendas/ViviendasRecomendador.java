@@ -34,6 +34,8 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 	
 	/** CaseBase object */
 	CBRCaseBase _caseBase;
+	
+	ArrayList<CBRCase> solucion  = new ArrayList<CBRCase>();
 
 	@Override
 	public void configure() throws ExecutionException {
@@ -96,6 +98,9 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		//Solamente mostramos el resultado
 		DisplayCasesTableMethod.displayCasesInTableBasic(casos);
 		
+		//Guardamos la solucion en su atributo
+		solucion = (ArrayList<CBRCase>) casos;
+		
 	}
 
 	@Override
@@ -104,34 +109,26 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		
 	}
 	
-	public static void main(String[] args) {
+	public ArrayList<CBRCase> getSolution(){
+		return solucion;
+	}
+	
+	public void ejecutarConsulta(DescripcionVivienda des){
 		
-		//Crear el objeto que implementa la aplicacion CBR
-		ViviendasRecomendador trApp = new ViviendasRecomendador();
 		
-		try
-		{
-			//Configuracion
-			trApp.configure();
-			//Preciclo
-			trApp.preCycle();
-			
-			//Crear Descripcion vivienda
-			DescripcionVivienda des = new DescripcionVivienda(1);
-			des.setPrecio(200000);
-			
-			
-			//Crear objeto que almacena la consulta
-			CBRQuery query = new CBRQuery();
-			query.setDescription(des);
-			
-			//Ejecutar el ciclo
-			trApp.cycle(query);
-			
-
-		} catch (Exception e)
-		{
-			org.apache.commons.logging.LogFactory.getLog(ViviendasRecomendador.class).error(e);
+		//Crear objeto que almacena la consulta
+		CBRQuery query = new CBRQuery();
+		query.setDescription(des);
+		System.out.println(des.toString());
+		System.out.println(query.toString());
+		
+		//Ejecutar el ciclo
+		try {
+			cycle(query);
+		} catch (Exception ex) {
+			org.apache.commons.logging.LogFactory.getLog(ViviendasRecomendador.class).error(ex);
 		}
 	}
+	
+	
 }
