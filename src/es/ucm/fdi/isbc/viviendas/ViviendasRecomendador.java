@@ -3,8 +3,6 @@ package es.ucm.fdi.isbc.viviendas;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import es.ucm.fdi.isbc.viviendas.representacion.Coordenada;
-import es.ucm.fdi.isbc.viviendas.representacion.DescripcionVivienda;
 import jcolibri.casebase.LinealCaseBase;
 import jcolibri.cbraplications.StandardCBRApplication;
 import jcolibri.cbrcore.Attribute;
@@ -14,17 +12,15 @@ import jcolibri.cbrcore.CBRQuery;
 import jcolibri.cbrcore.Connector;
 import jcolibri.exception.ExecutionException;
 import jcolibri.extensions.recommendation.casesDisplay.DisplayCasesTableMethod;
-import jcolibri.extensions.recommendation.casesDisplay.UserChoice;
-import jcolibri.extensions.recommendation.conditionals.BuyOrQuit;
 import jcolibri.method.retrieve.RetrievalResult;
 import jcolibri.method.retrieve.NNretrieval.NNConfig;
 import jcolibri.method.retrieve.NNretrieval.NNScoringMethod;
 import jcolibri.method.retrieve.NNretrieval.similarity.global.Average;
 import jcolibri.method.retrieve.NNretrieval.similarity.local.Equal;
-import jcolibri.method.retrieve.NNretrieval.similarity.local.Interval;
 import jcolibri.method.retrieve.NNretrieval.similarity.local.recommenders.InrecaLessIsBetter;
 import jcolibri.method.retrieve.NNretrieval.similarity.local.recommenders.McSherryMoreIsBetter;
 import jcolibri.method.retrieve.selection.SelectCases;
+import es.ucm.fdi.isbc.viviendas.representacion.DescripcionVivienda;
 
 
 public class ViviendasRecomendador implements StandardCBRApplication {
@@ -96,7 +92,7 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		//Aqui se incluiria el codigo para adaptar la solucion
 		
 		//Solamente mostramos el resultado
-		DisplayCasesTableMethod.displayCasesInTableBasic(casos);
+		//DisplayCasesTableMethod.displayCasesInTableBasic(casos);
 		
 		//Guardamos la solucion en su atributo
 		solucion = (ArrayList<CBRCase>) casos;
@@ -113,7 +109,7 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		return solucion;
 	}
 	
-	public void ejecutarConsulta(DescripcionVivienda des){
+	public ArrayList<CBRCase> ejecutarConsulta(DescripcionVivienda des){
 		
 		
 		//Crear objeto que almacena la consulta
@@ -128,6 +124,8 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		} catch (Exception ex) {
 			org.apache.commons.logging.LogFactory.getLog(ViviendasRecomendador.class).error(ex);
 		}
+		
+		return solucion;
 	}
 	
 	

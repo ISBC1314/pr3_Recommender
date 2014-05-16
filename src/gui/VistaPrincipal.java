@@ -1,8 +1,11 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
@@ -12,6 +15,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -21,7 +25,14 @@ import es.ucm.fdi.isbc.viviendas.representacion.DescripcionVivienda;
 import es.ucm.fdi.isbc.viviendas.representacion.DescripcionVivienda.EstadoVivienda;
 import es.ucm.fdi.isbc.viviendas.representacion.DescripcionVivienda.TipoVivienda;
 
+import javax.swing.JTable;
+
+import jcolibri.cbrcore.CBRCase;
+
 public class VistaPrincipal {
+	
+	private JTabbedPane tabbedPane;
+	private JScrollPane scrollPaneSoluciones;
 	
 	private JFrame frmIsbc;
 	private JTextField textFieldHabitaciones;
@@ -36,13 +47,14 @@ public class VistaPrincipal {
 	JComboBox comboBoxTipoVivienda;
 	
 	private ViviendasRecomendador recomendador;
+	private JTable tablaSoluciones;
 
 	/**
 	 * Create the application.
 	 */
 	public VistaPrincipal(ViviendasRecomendador vr) {
 		initialize();
-		frmIsbc.setBounds(100, 100, 800,800);
+		frmIsbc.setBounds(100, 100, 1093,800);
 		frmIsbc.setVisible(true);
 		recomendador = vr;
 		
@@ -53,13 +65,11 @@ public class VistaPrincipal {
 	 */
 	private void initialize() {
 		frmIsbc = new JFrame();
-		frmIsbc.getContentPane().setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		frmIsbc.getContentPane().add(tabbedPane);
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		
-		JPanel panel = new JPanel();
-		tabbedPane.addTab("Consultas", null, panel, null);
+		JPanel panelConsultas = new JPanel();
+		tabbedPane.addTab("Consultas", null, panelConsultas, null);
 		
 		JLabel lblPrecio = new JLabel("Precio");
 		
@@ -112,31 +122,31 @@ public class VistaPrincipal {
 				botonBuscaCasas();
 			}
 		});
-		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel.createSequentialGroup()
+		GroupLayout gl_panelConsultas = new GroupLayout(panelConsultas);
+		gl_panelConsultas.setHorizontalGroup(
+			gl_panelConsultas.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelConsultas.createSequentialGroup()
+					.addGroup(gl_panelConsultas.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panelConsultas.createSequentialGroup()
 							.addContainerGap()
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_panelConsultas.createParallelGroup(Alignment.LEADING)
 								.addComponent(lblZona)
 								.addComponent(lblBaos)
 								.addComponent(lblEstado)
-								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-									.addGroup(gl_panel.createSequentialGroup()
+								.addGroup(gl_panelConsultas.createParallelGroup(Alignment.LEADING, false)
+									.addGroup(gl_panelConsultas.createSequentialGroup()
 										.addComponent(lblSuperficie)
 										.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 										.addComponent(textFieldSuperficie, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE))
-									.addGroup(gl_panel.createSequentialGroup()
-										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+									.addGroup(gl_panelConsultas.createSequentialGroup()
+										.addGroup(gl_panelConsultas.createParallelGroup(Alignment.LEADING)
 											.addComponent(lblHabitaciones)
 											.addComponent(lblPrecio)
 											.addComponent(lblTipoVivienda)
 											.addComponent(lblPrecioMedio)
 											.addComponent(lblPrecioZona))
 										.addGap(27)
-										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+										.addGroup(gl_panelConsultas.createParallelGroup(Alignment.LEADING, false)
 											.addComponent(textFieldPrecioZona, 0, 0, Short.MAX_VALUE)
 											.addComponent(textFieldPrecioMedio, 0, 0, Short.MAX_VALUE)
 											.addComponent(comboBoxTipoVivienda, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -145,58 +155,74 @@ public class VistaPrincipal {
 											.addComponent(textFieldPrecio, Alignment.TRAILING, 0, 0, Short.MAX_VALUE)
 											.addComponent(textFieldZona)
 											.addComponent(comboBoxEstado, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
-						.addGroup(gl_panel.createSequentialGroup()
+						.addGroup(gl_panelConsultas.createSequentialGroup()
 							.addGap(54)
 							.addComponent(btnBuscarCasas)))
 					.addContainerGap(589, Short.MAX_VALUE))
 		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
+		gl_panelConsultas.setVerticalGroup(
+			gl_panelConsultas.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panelConsultas.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+					.addGroup(gl_panelConsultas.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblPrecio, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
 						.addComponent(textFieldPrecio, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+					.addGroup(gl_panelConsultas.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblZona)
 						.addComponent(textFieldZona, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+					.addGroup(gl_panelConsultas.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblBaos)
 						.addComponent(textFieldBanios, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_panelConsultas.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblHabitaciones)
 						.addComponent(textFieldHabitaciones, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+					.addGroup(gl_panelConsultas.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblTipoVivienda)
 						.addComponent(comboBoxTipoVivienda, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+					.addGroup(gl_panelConsultas.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblSuperficie)
 						.addComponent(textFieldSuperficie, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+					.addGroup(gl_panelConsultas.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblEstado)
 						.addComponent(comboBoxEstado, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+					.addGroup(gl_panelConsultas.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblPrecioMedio)
 						.addComponent(textFieldPrecioMedio, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+					.addGroup(gl_panelConsultas.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblPrecioZona)
 						.addComponent(textFieldPrecioZona, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addComponent(btnBuscarCasas)
 					.addContainerGap(454, Short.MAX_VALUE))
 		);
-		panel.setLayout(gl_panel);
+		panelConsultas.setLayout(gl_panelConsultas);
 		
-		JTabbedPane tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.addTab("New tab", null, tabbedPane_1, null);
+        tablaSoluciones = new JTable();
+		
+		
+		scrollPaneSoluciones = new JScrollPane(tablaSoluciones);
+		tabbedPane.addTab("Soluciones", null, scrollPaneSoluciones, null);
+
+		GroupLayout groupLayout = new GroupLayout(frmIsbc.getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 851, Short.MAX_VALUE)
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		frmIsbc.getContentPane().setLayout(groupLayout);
 	}
 	
 	
@@ -233,6 +259,14 @@ public class VistaPrincipal {
 			des.setPrecioZona(Integer.parseInt(textFieldPrecioZona.getText()));
 
 
-		recomendador.ejecutarConsulta(des);
+		ArrayList<CBRCase> solucion = recomendador.ejecutarConsulta(des);
+		
+		 TablaResultados res = new TablaResultados(solucion);
+         tablaSoluciones = new JTable(res);
+         scrollPaneSoluciones = new JScrollPane(tablaSoluciones);
+ 		 tabbedPane.removeTabAt(1);
+ 		 tabbedPane.addTab("Soluciones", null, scrollPaneSoluciones, null);
+         tabbedPane.setSelectedIndex(1);
+
 	}
 }
