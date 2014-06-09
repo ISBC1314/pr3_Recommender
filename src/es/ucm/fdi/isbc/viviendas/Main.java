@@ -9,21 +9,21 @@ public class Main {
 		
 		
 		//Crear el objeto que implementa la aplicacion CBR
-		ViviendasRecomendador vr = new ViviendasRecomendador();
+		ViviendasRecomendador viviendasRecomendador = new ViviendasRecomendador();
 		
 		try
 		{
 			//Configuracion
-			vr.configure();
+			viviendasRecomendador.configure();
 			//Preciclo
-			vr.preCycle();
+			viviendasRecomendador.preCycle();
 			
 		} catch (Exception e)
 		{
 			org.apache.commons.logging.LogFactory.getLog(ViviendasRecomendador.class).error(e);
 		}
 		
-		VistaPrincipal vpa = new VistaPrincipal(vr);
+		VistaPrincipal vistaPrincipal = new VistaPrincipal(viviendasRecomendador);
 
 	}
 

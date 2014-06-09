@@ -64,12 +64,12 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		simConfig.setDescriptionSimFunction(new Average());
 		
 		//Fijamos las funciones de similitud locales
-		simConfig.addMapping(new Attribute("tipo",  DescripcionVivienda.class), new Equal());
-		simConfig.addMapping(new Attribute("superficie",  DescripcionVivienda.class), new McSherryMoreIsBetter(7,1));
-		simConfig.addMapping(new Attribute("habitaciones",  DescripcionVivienda.class), new McSherryMoreIsBetter(0,0));
+		//simConfig.addMapping(new Attribute("tipo",  DescripcionVivienda.class), new Equal());
+		//simConfig.addMapping(new Attribute("superficie",  DescripcionVivienda.class), new McSherryMoreIsBetter(7,1));
+		//simConfig.addMapping(new Attribute("habitaciones",  DescripcionVivienda.class), new McSherryMoreIsBetter(0,0));
 		simConfig.addMapping(new Attribute("banios", DescripcionVivienda.class), new McSherryMoreIsBetter(0,0));
-		simConfig.addMapping(new Attribute("precio", DescripcionVivienda.class), new InrecaLessIsBetter(2000, 0.5));
-		simConfig.addMapping(new Attribute("coordenada", DescripcionVivienda.class),  new Equal());
+		//simConfig.addMapping(new Attribute("precio", DescripcionVivienda.class), new InrecaLessIsBetter(2000, 0.5));
+		//simConfig.addMapping(new Attribute("coordenada", DescripcionVivienda.class),  new Equal());
 		
 		//Es posible modificar el peso de cada atributo en la media ponderada
 		//Por defecto el peso es 1

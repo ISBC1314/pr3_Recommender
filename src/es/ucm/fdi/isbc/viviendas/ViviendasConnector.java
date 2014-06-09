@@ -17,25 +17,21 @@ public class ViviendasConnector implements Connector {
 
 	@Override
 	public void initFromXMLfile(URL file) throws InitializingException {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void close() {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void storeCases(Collection<CBRCase> cases) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void deleteCases(Collection<CBRCase> cases) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -70,7 +66,6 @@ public class ViviendasConnector implements Connector {
 
 	@Override
 	public Collection<CBRCase> retrieveSomeCases(CaseBaseFilter filter) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	
