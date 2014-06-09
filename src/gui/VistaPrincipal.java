@@ -3,7 +3,6 @@ package gui;
 import java.awt.Font;
 import java.util.Set;
 
-import javax.swing.ComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -32,10 +31,11 @@ public class VistaPrincipal {
 	 */
 	public VistaPrincipal(ViviendasRecomendador viviendasRecomendador) {
 		initialize();
+		recomendador = viviendasRecomendador;
 		frmIsbc.setBounds(100, 100, 1093,800);
 		frmIsbc.setVisible(true);
 		formularioInicial();
-		recomendador = viviendasRecomendador;
+		
 		
 		//String[] ciudades = recomendador.getCiudades().toArray(new String[recomendador.getCiudades().size()]);
 		//for(String ciudad : c)
@@ -141,9 +141,10 @@ public class VistaPrincipal {
 				"Entre 650.000\u20AC y 1.000.000\u20AC",
 				"Entre 1.000.000\u20AC y 1.500.000\u20AC",
 				"M\u00E1s 1.500.000\u20AC"};
-		String[] ciudades = {};
 		
-		JComboBox ciudad = new JComboBox(ciudades);
+		JComboBox ciudad = new JComboBox();
+		for (int i=0;i<recomendador.getCiudades().size();i++)
+			ciudad.addItem(recomendador.getCiudades().get(i));
 		JComboBox precioMax = new JComboBox(precios);
 		Object[] options = {
 			"Ciudad:", ciudad,
@@ -159,9 +160,9 @@ public class VistaPrincipal {
 	
 	public void ejecutaConsultaInicial(String ciudad, int precio){
 		if (recomendador == null) System.out.println("recomendador null");
-		//DescripcionVivienda des = new DescripcionVivienda(1);
-		//des.setPrecio(precio);
-		//recomendador.ejecutarConsulta(des);
+		DescripcionVivienda des = new DescripcionVivienda(1);
+		des.setPrecio(precio);
+		recomendador.ejecutarConsulta(des);
 		
 
 		

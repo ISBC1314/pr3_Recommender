@@ -35,7 +35,7 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 	
 	ArrayList<CBRCase> solucion  = new ArrayList<CBRCase>();
 	
-	Set<String> ciudades = new HashSet<String>();
+	ArrayList<String> ciudades = new ArrayList<String>();
 
 	@Override
 	public void configure() throws ExecutionException {
@@ -50,6 +50,9 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 			throw new ExecutionException(e);
 		}
 		
+		
+		
+		
 	}
 
 	@Override
@@ -57,7 +60,12 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		// Load cases from connector into the case base
 		_caseBase.init(_connector);		
 		_caseBase.learnCases(_connector.retrieveAllCases());
-		
+		//Imprimir todos los casos de la base de casos
+		/*
+		Collection<CBRCase> cases = _caseBase.getCases();
+		for (CBRCase c : cases)
+			System.out.println(c);
+		*/
 		//Sacamos los nombres de las ciudades
 		getCiudades(_caseBase.getCases());
 		
@@ -76,7 +84,7 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		//simConfig.addMapping(new Attribute("superficie",  DescripcionVivienda.class), new McSherryMoreIsBetter(7,1));
 		//simConfig.addMapping(new Attribute("habitaciones",  DescripcionVivienda.class), new McSherryMoreIsBetter(0,0));
 		//simConfig.addMapping(new Attribute("banios", DescripcionVivienda.class), new McSherryMoreIsBetter(0,0));
-		simConfig.addMapping(new Attribute("precio", DescripcionVivienda.class), new InrecaLessIsBetter(2000, 0.5));
+		//simConfig.addMapping(new Attribute("precio", DescripcionVivienda.class), new InrecaLessIsBetter(2000, 0.5));
 		//simConfig.addMapping(new Attribute("coordenada", DescripcionVivienda.class),  new Equal());
 		
 		//Es posible modificar el peso de cada atributo en la media ponderada
@@ -136,7 +144,7 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		return solucion;
 	}
 	
-	public Set<String> getCiudades(){
+	public ArrayList<String> getCiudades(){
 		return ciudades;
 	}
 	
@@ -144,9 +152,11 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		
 		for(CBRCase caso : casos){
 			DescripcionVivienda descripcionVivienda = (DescripcionVivienda) caso.getDescription();
-			String url = descripcionVivienda.getUrl(); 
-			String[] split = url.split("/");
-			ciudades.add(split[4]);
+			String localizacion = descripcionVivienda.getLocalizacion();
+			String[] split = localizacion.split("/");
+			if (!ciudades.contains(split[1])){
+				ciudades.add(split[1]);
+			}
 		}
 	}
 	
