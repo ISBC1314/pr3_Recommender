@@ -24,14 +24,20 @@ public class VistaPrincipal {
 	private JFrame frmIsbc;
 	
 	private ViviendasRecomendador recomendador;
-	private String[] ciudades;
+	
+	//Datos formulario
+	JComboBox<String> JComboBox_superficie;
+	JComboBox<String> JComboBox_habitaciones;
+	JComboBox<String> JComboBox_banios;
+	JComboBox<String> JComboBox_precio;
+	JComboBox<String> JComboBox_localizacion;
 
 	/**
 	 * Create the application.
 	 */
 	public VistaPrincipal(ViviendasRecomendador viviendasRecomendador) {
-		initialize();
 		recomendador = viviendasRecomendador;
+		initialize();
 		frmIsbc.setBounds(100, 100, 1093,800);
 		frmIsbc.setVisible(true);
 		formularioInicial();
@@ -46,6 +52,7 @@ public class VistaPrincipal {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	@SuppressWarnings("unchecked")
 	private void initialize() {
 		frmIsbc = new JFrame();
 		
@@ -55,13 +62,15 @@ public class VistaPrincipal {
 		frmIsbc.getContentPane().add(JPanel_filtros, "cell 1 0,grow");
 		JPanel_filtros.setLayout(new MigLayout("", "[125.00,grow][75.00,grow][grow]", "[15.00,grow][15.00,grow][15.00,grow][15.00,grow][15.00,grow][30.00,grow][15.00,grow][grow]"));
 		
+		
+		
 		//Superficie
 		JLabel JLabel_superficie = new JLabel("Superficie:");
 		JLabel_superficie.setHorizontalAlignment(SwingConstants.CENTER);
 		JLabel_superficie.setFont(new Font("Tahoma", Font.BOLD, 12));
 		JPanel_filtros.add(JLabel_superficie, "cell 0 0");		    
 		String[] superficies = {"Desde 50m\u00B2","Desde 100m\u00B2","Desde 150m\u00B2","Desde 200m\u00B2","Desde 250m\u00B2" };
-		JComboBox JComboBox_superficie = new JComboBox(superficies);
+		JComboBox_superficie = new JComboBox<String>(superficies);
 		JPanel_filtros.add(JComboBox_superficie,"cell 1 0");
 		
 		//Habitaciones
@@ -70,7 +79,7 @@ public class VistaPrincipal {
 		JLabel_habitaciones.setFont(new Font("Tahoma", Font.BOLD, 12));
 		JPanel_filtros.add(JLabel_habitaciones, "cell 0 1");		    
 		String[] habitaciones = {"1","2","3","4","Más de 4" };
-		JComboBox JComboBox_habitaciones = new JComboBox(habitaciones);
+		JComboBox_habitaciones = new JComboBox<String>(habitaciones);
 		JPanel_filtros.add(JComboBox_habitaciones,"cell 1 1");
 		
 		//Baños
@@ -79,25 +88,26 @@ public class VistaPrincipal {
 		JLabel_banios.setFont(new Font("Tahoma", Font.BOLD, 12));
 		JPanel_filtros.add(JLabel_banios, "cell 0 2");		    
 		String[] banios = {"1","2","Más de 2" };
-		JComboBox JComboBox_banios = new JComboBox(banios);
+		JComboBox_banios = new JComboBox<String>(banios);
 		JPanel_filtros.add(JComboBox_banios,"cell 1 2");
 		
 		//Precio
 		JLabel JLabel_precio = new JLabel("Precio:");
 		JLabel_precio.setHorizontalAlignment(SwingConstants.CENTER);
 		JLabel_precio.setFont(new Font("Tahoma", Font.BOLD, 12));
-		JPanel_filtros.add(JLabel_precio, "cell 0 3");		    
+		JPanel_filtros.add(JLabel_precio, "cell 0 3");
 		String[] precios = {"Menos de 250.000\u20AC","Entre 250.000\u20AC y 650.000\u20AC","Entre 650.000\u20AC y 1.000.000\u20AC","Entre 1.000.000\u20AC y 1.500.000\u20AC","M\u00E1s 1.500.000\u20AC"};
-		JComboBox JComboBox_precio = new JComboBox(precios);
+		JComboBox_precio = new JComboBox<String>(precios);
 		JPanel_filtros.add(JComboBox_precio,"cell 1 3");
 		
 		//Localizacion
 		JLabel JLabel_localizacion = new JLabel("Localización:");
 		JLabel_localizacion.setHorizontalAlignment(SwingConstants.CENTER);
 		JLabel_localizacion.setFont(new Font("Tahoma", Font.BOLD, 12));
-		JPanel_filtros.add(JLabel_localizacion, "cell 0 4");	
-		String[] localizaciones = {"Ciudad1","Ciudad2","Ciudad3","Ciudad4","Ciudad5" };
-		JComboBox JComboBox_localizacion = new JComboBox(localizaciones);
+		JPanel_filtros.add(JLabel_localizacion, "cell 0 4");
+		JComboBox_localizacion = new JComboBox<String>();
+		for (int i=0;i<recomendador.getCiudades().size();i++)
+			JComboBox_localizacion.addItem(recomendador.getCiudades().get(i));
 		JPanel_filtros.add(JComboBox_localizacion,"cell 1 4");
 		
 		//Extras
@@ -136,24 +146,21 @@ public class VistaPrincipal {
 	
 	
 	public void formularioInicial(){
-		String[] precios = {"Menos de 250.000\u20AC",
-				"Entre 250.000\u20AC y 650.000\u20AC",
-				"Entre 650.000\u20AC y 1.000.000\u20AC",
-				"Entre 1.000.000\u20AC y 1.500.000\u20AC",
-				"M\u00E1s 1.500.000\u20AC"};
+		String[] precios = {"Menos de 250.000\u20AC","Entre 250.000\u20AC y 650.000\u20AC","Entre 650.000\u20AC y 1.000.000\u20AC","Entre 1.000.000\u20AC y 1.500.000\u20AC","M\u00E1s 1.500.000\u20AC"};
+		JComboBox<String> precio = new JComboBox<String>(precios);
 		
-		JComboBox ciudad = new JComboBox();
+		JComboBox<String> localizacion = new JComboBox<String>();
 		for (int i=0;i<recomendador.getCiudades().size();i++)
-			ciudad.addItem(recomendador.getCiudades().get(i));
-		JComboBox precioMax = new JComboBox(precios);
+			localizacion.addItem(recomendador.getCiudades().get(i));
+		
 		Object[] options = {
-			"Ciudad:", ciudad,
-		    "Precio máximo:", precioMax
+			"Ciudad:", localizacion,
+		    "Precio máximo:", precio
 		};
 		int option = JOptionPane.showConfirmDialog(null, options, "Parámetros iniciales", JOptionPane.OK_CANCEL_OPTION);
 		if (option == JOptionPane.OK_OPTION){
-			String ciudad_vivienda = ciudad.getName();
-			int precioMax_vivienda = precioMax.getComponentCount();
+			String ciudad_vivienda = localizacion.getName();
+			int precioMax_vivienda = precio.getComponentCount();
 			ejecutaConsultaInicial(ciudad_vivienda,precioMax_vivienda);
 		}
 	}
@@ -162,9 +169,6 @@ public class VistaPrincipal {
 		if (recomendador == null) System.out.println("recomendador null");
 		DescripcionVivienda des = new DescripcionVivienda(1);
 		des.setPrecio(precio);
-		recomendador.ejecutarConsulta(des);
-		
-
-		
+		recomendador.ejecutarConsulta(des);			
 	}
 }
