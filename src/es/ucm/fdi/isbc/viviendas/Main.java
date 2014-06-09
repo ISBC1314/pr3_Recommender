@@ -24,6 +24,7 @@ public class Main {
 		
 		
 		VistaPrincipal vistaPrincipal = new VistaPrincipal(viviendasRecomendador);
+		viviendasRecomendador.setVista(vistaPrincipal);
 
 	}
 

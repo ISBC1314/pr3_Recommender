@@ -1,33 +1,33 @@
 package gui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
+import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 
 import jcolibri.cbrcore.CBRCase;
 import net.miginfocom.swing.MigLayout;
 import es.ucm.fdi.isbc.viviendas.ViviendasRecomendador;
 import es.ucm.fdi.isbc.viviendas.representacion.DescripcionVivienda;
-import es.ucm.fdi.isbc.viviendas.representacion.DescripcionVivienda.EstadoVivienda;
-import es.ucm.fdi.isbc.viviendas.representacion.DescripcionVivienda.TipoVivienda;
 import es.ucm.fdi.isbc.viviendas.representacion.ExtrasBasicos;
 import es.ucm.fdi.isbc.viviendas.representacion.ExtrasFinca;
 import es.ucm.fdi.isbc.viviendas.representacion.ExtrasOtros;
@@ -40,6 +40,9 @@ public class VistaPrincipal {
 	private ViviendasRecomendador recomendador;
 	
 	
+	//Panel viviendas
+	private JPanel JPanel_viviendas;
+	private JList<DescripcionVivienda> JList_viviendas;
 	
 	//Datos formulario
 	private JComboBox<String> JComboBox_superficie;
@@ -47,7 +50,7 @@ public class VistaPrincipal {
 	private JComboBox<String> JComboBox_banios;
 	private JComboBox<String> JComboBox_precio;
 	private JComboBox<String> JComboBox_localizacion;
-	private JComboBox<String> JComboBox_estado;
+	//private JComboBox<String> JComboBox_estado;
 	private JButton JButton_buscar;
 	private JCheckBox JCheckBox_piscina;
 	private JCheckBox JCheckBox_terraza;
@@ -209,21 +212,52 @@ public class VistaPrincipal {
 		JCheckBox_piscina = new JCheckBox();
 		JPanel_extras.add(JCheckBox_piscina,"cell 1 6");
 		
-		//Botón
+		//Botón buscar
 		JButton_buscar = new JButton("Buscar");
 		JPanel_filtros.add(JButton_buscar,"cell 0 6");
 		JButton_buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mostrarLista(recomendador.ejecutarConsulta(getDescripcionVivienda()));
+				actualizarLista(recomendador.ejecutarConsulta(getDescripcionVivienda()));
+			}
+		});
+		
+		JButton_buscar = new JButton("Filtrar");
+		JPanel_filtros.add(JButton_buscar,"cell 1 6");
+		JButton_buscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//mostrarLista(recomendador.ejecutarFiltro(getDescripcionVivienda()));
 			}
 		});
 		
 		/********************** VISTA DE LISTA DE VIVIENDAS RESULTADO ********************/
 		
-		JScrollPane_listaViviendas = new JScrollPane();
+		JPanel_viviendas = new JPanel();
+		JPanel_viviendas.setLayout(new MigLayout("", "[]", "[grow 600]"));
+		
+		JList_viviendas = new JList<DescripcionVivienda>();
+		JList_viviendas.setModel(new DefaultListModel<DescripcionVivienda>());
+		JList_viviendas.setCellRenderer(new CellRendererViviendas());
+		JList_viviendas.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				Object source = e.getSource();
+				if (source.equals(JList_viviendas)){
+					int index = JList_viviendas.getSelectedIndex();
+					if (index != -1){
+						DescripcionVivienda des = JList_viviendas.getModel().getElementAt(index);
+						//cargaVistaVivienda(false,descripcion);
+					}
+				}
+			}
+		});
+		
+		JScrollPane_listaViviendas = new JScrollPane(JList_viviendas);
 		frmIsbc.getContentPane().add(JScrollPane_listaViviendas,"cell 3 0,grow");
+		
+		
+		
 		JSplitPane_separador.setLeftComponent(JPanel_filtros);
-		JSplitPane_separador.setRightComponent(JScrollPane_listaViviendas);		
+		JSplitPane_separador.setRightComponent(JScrollPane_listaViviendas);	
+
 	}
 	
 	public DescripcionVivienda getDescripcionVivienda(){
@@ -333,7 +367,7 @@ public class VistaPrincipal {
 			DescripcionVivienda des = new DescripcionVivienda(1);
 			des.setPrecio(precio);
 			des.setLocalizacion(ciudad);
-			mostrarLista(recomendador.ejecutarConsulta(des));
+			actualizarLista(recomendador.ejecutarConsulta(des));
 		}
 		//Valores iniciales vacios
 		else{
@@ -342,11 +376,14 @@ public class VistaPrincipal {
 	}
 	
 
-	public void mostrarLista (ArrayList<CBRCase> casos){
-		JPanel JPanel_viviendas = new JPanel();
-		JPanel_viviendas.setLayout(new MigLayout("", "[]", "[grow 600]"));
-		JScrollPane_listaViviendas = new JScrollPane(JPanel_viviendas);
-		frmIsbc.getContentPane().add(JScrollPane_listaViviendas,"cell 3 0,grow");
+	public void actualizarLista (ArrayList<CBRCase> casos){
+		DefaultListModel<DescripcionVivienda> model = (DefaultListModel<DescripcionVivienda>) JList_viviendas.getModel();
+		model.removeAllElements();
+		for (int i=0;i<casos.size();i++)
+			model.addElement((DescripcionVivienda) casos.get(i).getDescription());
+	
+		/*
+		JPanel_viviendas = new JPanel();
 		//JScrollPane_listaViviendas.setViewportView(JPanel_viviendas);
 		//JScrollPane_listaViviendas.setViewportView(JPanel_aux);
 		for (int i=0; i<casos.size(); i++){
@@ -366,10 +403,12 @@ public class VistaPrincipal {
 			JPanel_viviendaAux.add(JLabel_habitaciones);
 			JPanel_viviendaAux.add(JLabel_banios);
 			JPanel_viviendaAux.add(JLabel_descripcion);
-			
 			JPanel_viviendas.add(JPanel_viviendaAux,"cell 0 "+i);
+			System.out.println("terminé");
 			//JScrollPane_listaViviendas.setViewportView(JPanel_viviendaAux);
 		}
+		*/
+		SwingUtilities.updateComponentTreeUI(frmIsbc);
 		
 	}
 	

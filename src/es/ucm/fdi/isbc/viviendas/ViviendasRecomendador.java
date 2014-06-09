@@ -2,8 +2,6 @@ package es.ucm.fdi.isbc.viviendas;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -23,11 +21,9 @@ import jcolibri.method.retrieve.NNretrieval.NNScoringMethod;
 import jcolibri.method.retrieve.NNretrieval.similarity.global.Average;
 import jcolibri.method.retrieve.NNretrieval.similarity.local.Equal;
 import jcolibri.method.retrieve.NNretrieval.similarity.local.Interval;
-import jcolibri.method.retrieve.NNretrieval.similarity.local.recommenders.InrecaLessIsBetter;
-import jcolibri.method.retrieve.NNretrieval.similarity.local.recommenders.McSherryLessIsBetter;
-import jcolibri.method.retrieve.NNretrieval.similarity.local.recommenders.McSherryMoreIsBetter;
 import jcolibri.method.retrieve.selection.SelectCases;
 import es.ucm.fdi.isbc.viviendas.representacion.DescripcionVivienda;
+import gui.VistaPrincipal;
 
 
 public class ViviendasRecomendador implements StandardCBRApplication {
@@ -41,7 +37,13 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 	ArrayList<CBRCase> solucion  = new ArrayList<CBRCase>();
 	
 	SortedSet<String> ciudades = new TreeSet<String>(); 
+	
+	VistaPrincipal vistaprincipal;
 
+	public void setVista(VistaPrincipal vista){
+		vistaprincipal = vista;
+	}
+	
 	@Override
 	public void configure() throws ExecutionException {
 		try{
@@ -116,6 +118,7 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		
 		//Guardamos la solucion en su atributo
 		solucion = (ArrayList<CBRCase>) casos;
+		vistaprincipal.actualizarLista(solucion);
 		
 	}
 
@@ -156,7 +159,6 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		
 		for(CBRCase caso : casos){
 			DescripcionVivienda descripcionVivienda = (DescripcionVivienda) caso.getDescription();
-			String localizacion = descripcionVivienda.getLocalizacion();
 			String url = descripcionVivienda.getUrl(); 
 			String[] split = url.split("/");
 			ciudades.add(split[4]);

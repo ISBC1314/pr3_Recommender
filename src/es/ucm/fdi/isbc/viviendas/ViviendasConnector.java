@@ -73,14 +73,6 @@ public class ViviendasConnector implements Connector {
 		return null;
 	}
 	
-	private String sacaCiudad(){
-		
-		String ciudad = "";
-		
-		
-		return ciudad;	
-	}
-	
 	
 	/**
 	 * Testing method

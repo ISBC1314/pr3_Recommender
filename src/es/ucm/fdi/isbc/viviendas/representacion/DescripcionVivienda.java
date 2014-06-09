@@ -1,9 +1,6 @@
 package es.ucm.fdi.isbc.viviendas.representacion;
 
-import java.util.Collection;
-
 import jcolibri.cbrcore.Attribute;
-import jcolibri.cbrcore.CBRCase;
 import jcolibri.cbrcore.CaseComponent;
 
 public class DescripcionVivienda implements CaseComponent{
