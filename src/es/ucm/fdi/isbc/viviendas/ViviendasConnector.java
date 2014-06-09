@@ -82,7 +82,6 @@ public class ViviendasConnector implements Connector {
 	}
 	
 	
-	
 	/**
 	 * Testing method
 	 * @param args

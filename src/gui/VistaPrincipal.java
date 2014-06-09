@@ -138,8 +138,8 @@ public class VistaPrincipal {
 		JLabel_localizacion.setFont(new Font("Tahoma", Font.BOLD, 12));
 		JPanel_filtros.add(JLabel_localizacion, "cell 0 4");
 		JComboBox_localizacion = new JComboBox<String>();
-		for (int i=0;i<recomendador.getCiudades().size();i++)
-			JComboBox_localizacion.addItem(recomendador.getCiudades().get(i));
+		for (String ciudad : recomendador.getCiudades())
+			JComboBox_localizacion.addItem(ciudad);
 		JComboBox_localizacion.setSelectedIndex(0);
 		JPanel_filtros.add(JComboBox_localizacion,"cell 1 4");
 		
@@ -304,8 +304,8 @@ public class VistaPrincipal {
 		precio.setSelectedIndex(0);
 		
 		JComboBox<String> localizacion = new JComboBox<String>();
-		for (int i=0;i<recomendador.getCiudades().size();i++)
-			localizacion.addItem(recomendador.getCiudades().get(i));
+		for (String ciudad: recomendador.getCiudades())
+			localizacion.addItem(ciudad);
 		localizacion.setSelectedIndex(0);
 		
 		Object[] options = {
@@ -316,7 +316,7 @@ public class VistaPrincipal {
 		int option = JOptionPane.showConfirmDialog(null, options, "Parámetros iniciales", JOptionPane.OK_CANCEL_OPTION);
 		if (option == JOptionPane.OK_OPTION){
 			String ciudad_vivienda = (String) localizacion.getSelectedItem();
-			int precioMax_vivienda = precio.getSelectedIndex();
+			int precioMax_vivienda = getPrecioFromIndex(precio.getSelectedIndex());
 			System.out.println("ciudad="+ciudad_vivienda+"    precio="+precioMax_vivienda);
 			
 			ejecutaConsultaInicial(ciudad_vivienda,precioMax_vivienda);
@@ -341,6 +341,7 @@ public class VistaPrincipal {
 		}
 	}
 	
+
 	public void mostrarLista (ArrayList<CBRCase> casos){
 		JPanel JPanel_viviendas = new JPanel();
 		JPanel_viviendas.setLayout(new MigLayout("", "[]", "[grow 600]"));
@@ -370,5 +371,26 @@ public class VistaPrincipal {
 			//JScrollPane_listaViviendas.setViewportView(JPanel_viviendaAux);
 		}
 		
+	}
+	
+	public int getPrecioFromIndex(int index){
+		
+		int precio = 0;
+		
+		switch (index) {
+        case 0:  precio = 250000;
+                 break;
+        case 1:  precio = 650000;
+                 break;
+        case 2:  precio = 1000000;
+                 break;
+        case 3:  precio = 1500000;
+                 break;
+        case 4:  precio = 50000000;
+        		 break;
+        default: precio = 650000;
+                 break;
+		}
+		return precio;
 	}
 }
