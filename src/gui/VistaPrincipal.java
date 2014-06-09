@@ -39,6 +39,7 @@ public class VistaPrincipal {
 	
 	private ViviendasRecomendador recomendador;
 	
+
 	
 	//Panel viviendas
 	private JPanel JPanel_viviendas;
@@ -69,12 +70,6 @@ public class VistaPrincipal {
 		frmIsbc.setBounds(100, 100, 1093,800);
 		frmIsbc.setVisible(true);
 		formularioInicial();
-		
-		
-		//String[] ciudades = recomendador.getCiudades().toArray(new String[recomendador.getCiudades().size()]);
-		//for(String ciudad : c)
-		//	System.out.println(ciudad.toString());
-		
 	}
 
 	/**
@@ -367,6 +362,7 @@ public class VistaPrincipal {
 			DescripcionVivienda des = new DescripcionVivienda(1);
 			des.setPrecio(precio);
 			des.setLocalizacion(ciudad);
+			des.setCoordenada(recomendador.getPosicionCiudades().get(ciudad));
 			actualizarLista(recomendador.ejecutarConsulta(des));
 		}
 		//Valores iniciales vacios
