@@ -6,8 +6,7 @@ public class Main {
 	
 	public static void main (String[] args)
 	{
-		
-		
+
 		//Crear el objeto que implementa la aplicacion CBR
 		ViviendasRecomendador viviendasRecomendador = new ViviendasRecomendador();
 		
@@ -22,6 +21,7 @@ public class Main {
 		{
 			org.apache.commons.logging.LogFactory.getLog(ViviendasRecomendador.class).error(e);
 		}
+		
 		
 		VistaPrincipal vistaPrincipal = new VistaPrincipal(viviendasRecomendador);
 

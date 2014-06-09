@@ -1,7 +1,9 @@
 package gui;
 
 import java.awt.Font;
+import java.util.Set;
 
+import javax.swing.ComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -14,12 +16,16 @@ import javax.swing.border.TitledBorder;
 
 import net.miginfocom.swing.MigLayout;
 import es.ucm.fdi.isbc.viviendas.ViviendasRecomendador;
+import es.ucm.fdi.isbc.viviendas.representacion.DescripcionVivienda;
+import es.ucm.fdi.isbc.viviendas.representacion.DescripcionVivienda.EstadoVivienda;
+import es.ucm.fdi.isbc.viviendas.representacion.DescripcionVivienda.TipoVivienda;
 
 public class VistaPrincipal {
 	
 	private JFrame frmIsbc;
 	
 	private ViviendasRecomendador recomendador;
+	private String[] ciudades;
 
 	/**
 	 * Create the application.
@@ -30,6 +36,10 @@ public class VistaPrincipal {
 		frmIsbc.setVisible(true);
 		formularioInicial();
 		recomendador = viviendasRecomendador;
+		
+		//String[] ciudades = recomendador.getCiudades().toArray(new String[recomendador.getCiudades().size()]);
+		//for(String ciudad : c)
+		//	System.out.println(ciudad.toString());
 		
 	}
 
@@ -85,7 +95,7 @@ public class VistaPrincipal {
 		JLabel JLabel_localizacion = new JLabel("Localización:");
 		JLabel_localizacion.setHorizontalAlignment(SwingConstants.CENTER);
 		JLabel_localizacion.setFont(new Font("Tahoma", Font.BOLD, 12));
-		JPanel_filtros.add(JLabel_localizacion, "cell 0 4");		    
+		JPanel_filtros.add(JLabel_localizacion, "cell 0 4");	
 		String[] localizaciones = {"Ciudad1","Ciudad2","Ciudad3","Ciudad4","Ciudad5" };
 		JComboBox JComboBox_localizacion = new JComboBox(localizaciones);
 		JPanel_filtros.add(JComboBox_localizacion,"cell 1 4");
@@ -132,6 +142,7 @@ public class VistaPrincipal {
 				"Entre 1.000.000\u20AC y 1.500.000\u20AC",
 				"M\u00E1s 1.500.000\u20AC"};
 		String[] ciudades = {};
+		
 		JComboBox ciudad = new JComboBox(ciudades);
 		JComboBox precioMax = new JComboBox(precios);
 		Object[] options = {
@@ -147,6 +158,12 @@ public class VistaPrincipal {
 	}
 	
 	public void ejecutaConsultaInicial(String ciudad, int precio){
+		if (recomendador == null) System.out.println("recomendador null");
+		//DescripcionVivienda des = new DescripcionVivienda(1);
+		//des.setPrecio(precio);
+		//recomendador.ejecutarConsulta(des);
+		
+
 		
 	}
 }

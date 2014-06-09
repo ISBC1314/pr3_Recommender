@@ -2,6 +2,9 @@ package es.ucm.fdi.isbc.viviendas;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 import jcolibri.casebase.LinealCaseBase;
 import jcolibri.cbraplications.StandardCBRApplication;
@@ -16,7 +19,6 @@ import jcolibri.method.retrieve.RetrievalResult;
 import jcolibri.method.retrieve.NNretrieval.NNConfig;
 import jcolibri.method.retrieve.NNretrieval.NNScoringMethod;
 import jcolibri.method.retrieve.NNretrieval.similarity.global.Average;
-import jcolibri.method.retrieve.NNretrieval.similarity.local.Equal;
 import jcolibri.method.retrieve.NNretrieval.similarity.local.recommenders.InrecaLessIsBetter;
 import jcolibri.method.retrieve.NNretrieval.similarity.local.recommenders.McSherryMoreIsBetter;
 import jcolibri.method.retrieve.selection.SelectCases;
@@ -32,6 +34,8 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 	CBRCaseBase _caseBase;
 	
 	ArrayList<CBRCase> solucion  = new ArrayList<CBRCase>();
+	
+	Set<String> ciudades = new HashSet<String>();
 
 	@Override
 	public void configure() throws ExecutionException {
@@ -53,6 +57,10 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		// Load cases from connector into the case base
 		_caseBase.init(_connector);		
 		_caseBase.learnCases(_connector.retrieveAllCases());
+		
+		//Sacamos los nombres de las ciudades
+		getCiudades(_caseBase.getCases());
+		
 		return _caseBase;
 	}
 
@@ -67,8 +75,8 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		//simConfig.addMapping(new Attribute("tipo",  DescripcionVivienda.class), new Equal());
 		//simConfig.addMapping(new Attribute("superficie",  DescripcionVivienda.class), new McSherryMoreIsBetter(7,1));
 		//simConfig.addMapping(new Attribute("habitaciones",  DescripcionVivienda.class), new McSherryMoreIsBetter(0,0));
-		simConfig.addMapping(new Attribute("banios", DescripcionVivienda.class), new McSherryMoreIsBetter(0,0));
-		//simConfig.addMapping(new Attribute("precio", DescripcionVivienda.class), new InrecaLessIsBetter(2000, 0.5));
+		//simConfig.addMapping(new Attribute("banios", DescripcionVivienda.class), new McSherryMoreIsBetter(0,0));
+		simConfig.addMapping(new Attribute("precio", DescripcionVivienda.class), new InrecaLessIsBetter(2000, 0.5));
 		//simConfig.addMapping(new Attribute("coordenada", DescripcionVivienda.class),  new Equal());
 		
 		//Es posible modificar el peso de cada atributo en la media ponderada
@@ -92,7 +100,7 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		//Aqui se incluiria el codigo para adaptar la solucion
 		
 		//Solamente mostramos el resultado
-		//DisplayCasesTableMethod.displayCasesInTableBasic(casos);
+		DisplayCasesTableMethod.displayCasesInTableBasic(casos);
 		
 		//Guardamos la solucion en su atributo
 		solucion = (ArrayList<CBRCase>) casos;
@@ -126,6 +134,20 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		}
 		
 		return solucion;
+	}
+	
+	public Set<String> getCiudades(){
+		return ciudades;
+	}
+	
+	private void getCiudades(Collection<CBRCase> casos){
+		
+		for(CBRCase caso : casos){
+			DescripcionVivienda descripcionVivienda = (DescripcionVivienda) caso.getDescription();
+			String url = descripcionVivienda.getUrl(); 
+			String[] split = url.split("/");
+			ciudades.add(split[4]);
+		}
 	}
 	
 	

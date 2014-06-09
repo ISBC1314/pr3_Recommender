@@ -5,6 +5,8 @@ import java.io.FileReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import jcolibri.cbrcore.CBRCase;
 import jcolibri.cbrcore.CaseBaseFilter;
@@ -14,6 +16,8 @@ import es.ucm.fdi.isbc.viviendas.representacion.DescripcionVivienda;
 import es.ucm.fdi.isbc.viviendas.representacion.SolucionVivienda;
 
 public class ViviendasConnector implements Connector {
+	
+	Set<String> ciudades = new HashSet<String>();
 
 	@Override
 	public void initFromXMLfile(URL file) throws InitializingException {
@@ -68,6 +72,15 @@ public class ViviendasConnector implements Connector {
 	public Collection<CBRCase> retrieveSomeCases(CaseBaseFilter filter) {
 		return null;
 	}
+	
+	private String sacaCiudad(){
+		
+		String ciudad = "";
+		
+		
+		return ciudad;	
+	}
+	
 	
 	
 	/**
