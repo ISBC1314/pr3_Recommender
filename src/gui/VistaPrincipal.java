@@ -326,10 +326,6 @@ public class VistaPrincipal {
 			des.setPrecio(precio);
 			des.setLocalizacion(ciudad);
 			des.setCoordenada(recomendador.getPosicionCiudades().get(ciudad));
-			System.out.println("Marina" +recomendador.getPosicionCiudades().get(ciudad));
-			System.out.println("Marina");
-			System.out.println("Marina");
-			System.out.println("Marina");
 			mostrarLista(recomendador.ejecutarConsulta(des));
 		}
 		//Valores iniciales vacios
