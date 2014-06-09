@@ -48,6 +48,29 @@ public class ExtrasOtros implements CaseComponent {
 				+ ", piscina=" + piscina + "]";
 	}
 
+	public String writeString(){
+		String aux ="";
+		if (patio)
+			aux += "patio, ";
+		if (balcon)
+			aux += "balcón, ";
+		if (zonaDeportiva)
+			aux += ", zona deportiva, ";
+		if (zonaComunitaria)
+			aux += "zona comunitaria, ";
+		if (terraza)
+			aux += "terraza, ";
+		if (piscinaComunitaria)
+			aux += "piscina comunitaria, ";
+		if (jardinPrivado)
+			aux += "jardin privado, ";
+		if (zonaInfantil)
+			aux += "zona infantil, ";
+		if (piscina)
+			aux += "piscina, ";
+		return aux;
+	}
+	
 	@Override
 	public Attribute getIdAttribute() {
 		return new Attribute("id", DescripcionVivienda.class);

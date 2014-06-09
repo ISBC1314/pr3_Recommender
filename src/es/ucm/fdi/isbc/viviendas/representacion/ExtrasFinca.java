@@ -41,6 +41,25 @@ public class ExtrasFinca implements CaseComponent{
 				+ "," + videoportero;
 	}
 	
+	public String writeString(){
+		String aux ="";
+		if (ascensor)
+			aux += "ascensor, ";
+		if (trastero)
+			aux += "trastero, ";
+		if (energiaSolar)
+			aux += ", energía solar, ";
+		if (servPorteria)
+			aux += "servicio de portería, ";
+		if (parkingComunitario)
+			aux += "parking comunitario, ";
+		if (garajePrivado)
+			aux += "garaje privado, ";
+		if (videoportero)
+			aux += "video portero, ";
+		return aux;
+	}
+	
 	@Override
 	public Attribute getIdAttribute() {
 		return new Attribute("id", DescripcionVivienda.class);

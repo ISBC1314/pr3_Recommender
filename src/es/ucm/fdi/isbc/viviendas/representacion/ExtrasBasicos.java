@@ -64,6 +64,47 @@ public class ExtrasBasicos implements CaseComponent{
 				+ aireAcondicionado + "," + nevera;
 	}
 	
+	public String writeString(){
+		String aux ="";
+		if (lavadero)
+			aux += "lavadero, ";
+		if (internet)
+			aux += "internet, ";
+		if (microondas)
+			aux += ", microondas, ";
+		if (horno)
+			aux += "horno, ";
+		if (amueblado)
+			aux += "amueblado, ";
+		if (cocinaOffice)
+			aux += "cocinaOffice, ";
+		if (parquet)
+			aux += "parquet, ";
+		if (domotica)
+			aux += "domotica, ";
+		if (armarios)
+			aux += "armarios, ";
+		if (tv)
+			aux += "tv, ";
+		if (lavadora)
+			aux += "lavadora, ";
+		if (electrodomesticos)
+			aux += "electrodomesticos, ";
+		if (suiteConBanio)
+			aux += "suite con baño, ";
+		if (puertaBlindada)
+			aux += "puerta blindada, ";
+		if (gresCeramica)
+			aux += "gres cerámica, ";
+		if (calefaccion)
+			aux += "calefacción, ";
+		if (aireAcondicionado)
+			aux += "aire acondicionado, ";
+		if (nevera)
+			aux += "nevera, ";
+		return aux;
+	}
+	
 	@Override
 	public Attribute getIdAttribute() {
 		return new Attribute("id", DescripcionVivienda.class);
