@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import jcolibri.casebase.LinealCaseBase;
 import jcolibri.cbraplications.StandardCBRApplication;
@@ -35,7 +37,7 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 	
 	ArrayList<CBRCase> solucion  = new ArrayList<CBRCase>();
 	
-	ArrayList<String> ciudades = new ArrayList<String>();
+	SortedSet<String> ciudades = new TreeSet<String>(); 
 
 	@Override
 	public void configure() throws ExecutionException {
@@ -49,10 +51,7 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		catch (Exception e){
 			throw new ExecutionException(e);
 		}
-		
-		
-		
-		
+
 	}
 
 	@Override
@@ -144,7 +143,7 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		return solucion;
 	}
 	
-	public ArrayList<String> getCiudades(){
+	public Set<String> getCiudades(){
 		return ciudades;
 	}
 	
@@ -153,10 +152,9 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		for(CBRCase caso : casos){
 			DescripcionVivienda descripcionVivienda = (DescripcionVivienda) caso.getDescription();
 			String localizacion = descripcionVivienda.getLocalizacion();
-			String[] split = localizacion.split("/");
-			if (!ciudades.contains(split[1])){
-				ciudades.add(split[1]);
-			}
+			String url = descripcionVivienda.getUrl(); 
+			String[] split = url.split("/");
+			ciudades.add(split[4]);
 		}
 	}
 	

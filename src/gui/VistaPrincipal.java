@@ -111,8 +111,8 @@ public class VistaPrincipal {
 		JLabel_localizacion.setFont(new Font("Tahoma", Font.BOLD, 12));
 		JPanel_filtros.add(JLabel_localizacion, "cell 0 4");
 		JComboBox_localizacion = new JComboBox<String>();
-		for (int i=0;i<recomendador.getCiudades().size();i++)
-			JComboBox_localizacion.addItem(recomendador.getCiudades().get(i));
+		for (String ciudad : recomendador.getCiudades())
+			JComboBox_localizacion.addItem(ciudad);
 		JComboBox_localizacion.setSelectedIndex(0);
 		JPanel_filtros.add(JComboBox_localizacion,"cell 1 4");
 		
@@ -195,8 +195,8 @@ public class VistaPrincipal {
 		precio.setSelectedIndex(0);
 		
 		JComboBox<String> localizacion = new JComboBox<String>();
-		for (int i=0;i<recomendador.getCiudades().size();i++)
-			localizacion.addItem(recomendador.getCiudades().get(i));
+		for (String ciudad: recomendador.getCiudades())
+			localizacion.addItem(ciudad);
 		localizacion.setSelectedIndex(0);
 		
 		Object[] options = {
