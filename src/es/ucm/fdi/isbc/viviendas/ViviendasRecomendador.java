@@ -21,7 +21,10 @@ import jcolibri.method.retrieve.RetrievalResult;
 import jcolibri.method.retrieve.NNretrieval.NNConfig;
 import jcolibri.method.retrieve.NNretrieval.NNScoringMethod;
 import jcolibri.method.retrieve.NNretrieval.similarity.global.Average;
+import jcolibri.method.retrieve.NNretrieval.similarity.local.Equal;
+import jcolibri.method.retrieve.NNretrieval.similarity.local.Interval;
 import jcolibri.method.retrieve.NNretrieval.similarity.local.recommenders.InrecaLessIsBetter;
+import jcolibri.method.retrieve.NNretrieval.similarity.local.recommenders.McSherryLessIsBetter;
 import jcolibri.method.retrieve.NNretrieval.similarity.local.recommenders.McSherryMoreIsBetter;
 import jcolibri.method.retrieve.selection.SelectCases;
 import es.ucm.fdi.isbc.viviendas.representacion.DescripcionVivienda;
@@ -79,7 +82,9 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		simConfig.setDescriptionSimFunction(new Average());
 		
 		//Fijamos las funciones de similitud locales
-		//simConfig.addMapping(new Attribute("tipo",  DescripcionVivienda.class), new Equal());
+		simConfig.addMapping(new Attribute("localizacion",  DescripcionVivienda.class), new Equal());
+		simConfig.addMapping(new Attribute("precio", DescripcionVivienda.class), new Interval(10000));
+		
 		//simConfig.addMapping(new Attribute("superficie",  DescripcionVivienda.class), new McSherryMoreIsBetter(7,1));
 		//simConfig.addMapping(new Attribute("habitaciones",  DescripcionVivienda.class), new McSherryMoreIsBetter(0,0));
 		//simConfig.addMapping(new Attribute("banios", DescripcionVivienda.class), new McSherryMoreIsBetter(0,0));
@@ -88,7 +93,7 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		
 		//Es posible modificar el peso de cada atributo en la media ponderada
 		//Por defecto el peso es 1
-		//simConfig.setWeight(new Attribute("localizacion", TravelDescription.class), 0.5);
+		simConfig.setWeight(new Attribute("precio", DescripcionVivienda.class), 0.02);
 		
 		//Ejecutamos la recuperacio por el vecino mas proximo
 		Collection<RetrievalResult> eval = NNScoringMethod.evaluateSimilarity(_caseBase.getCases(),  query, simConfig);

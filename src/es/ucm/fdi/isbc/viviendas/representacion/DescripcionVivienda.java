@@ -1,6 +1,9 @@
 package es.ucm.fdi.isbc.viviendas.representacion;
 
+import java.util.Collection;
+
 import jcolibri.cbrcore.Attribute;
+import jcolibri.cbrcore.CBRCase;
 import jcolibri.cbrcore.CaseComponent;
 
 public class DescripcionVivienda implements CaseComponent{
@@ -47,7 +50,7 @@ public class DescripcionVivienda implements CaseComponent{
 		String[] values = stringRep.split("#");
 		id = Integer.valueOf(values[0]);
 		titulo = values[1];
-		localizacion = values[2];
+		localizacion = getLocalizacionFromUrl(values[4]);
 		urlFoto = values[3];
 		url = values[4];
 		
@@ -204,6 +207,11 @@ public class DescripcionVivienda implements CaseComponent{
 	@Override
 	public Attribute getIdAttribute() {
 		return new Attribute("id", DescripcionVivienda.class);
+	}
+	
+	private String getLocalizacionFromUrl(String url){		
+		String[] split = url.split("/");
+		return (split[4]);	
 	}
 	
 }

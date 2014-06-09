@@ -207,7 +207,7 @@ public class VistaPrincipal {
 		int option = JOptionPane.showConfirmDialog(null, options, "Parámetros iniciales", JOptionPane.OK_CANCEL_OPTION);
 		if (option == JOptionPane.OK_OPTION){
 			String ciudad_vivienda = (String) localizacion.getSelectedItem();
-			int precioMax_vivienda = precio.getSelectedIndex();
+			int precioMax_vivienda = getPrecioFromIndex(precio.getSelectedIndex());
 			System.out.println("ciudad="+ciudad_vivienda+"    precio="+precioMax_vivienda);
 			
 			ejecutaConsultaInicial(ciudad_vivienda,precioMax_vivienda);
@@ -231,5 +231,26 @@ public class VistaPrincipal {
 		else{
 			
 		}
+	}
+	
+	public int getPrecioFromIndex(int index){
+		
+		int precio = 0;
+		
+		switch (index) {
+        case 0:  precio = 250000;
+                 break;
+        case 1:  precio = 650000;
+                 break;
+        case 2:  precio = 1000000;
+                 break;
+        case 3:  precio = 1500000;
+                 break;
+        case 4:  precio = 50000000;
+        		 break;
+        default: precio = 650000;
+                 break;
+		}
+		return precio;
 	}
 }
