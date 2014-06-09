@@ -2,8 +2,8 @@ package es.ucm.fdi.isbc.viviendas;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Iterator;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -23,10 +23,8 @@ import jcolibri.method.retrieve.NNretrieval.NNScoringMethod;
 import jcolibri.method.retrieve.NNretrieval.similarity.global.Average;
 import jcolibri.method.retrieve.NNretrieval.similarity.local.Equal;
 import jcolibri.method.retrieve.NNretrieval.similarity.local.Interval;
-import jcolibri.method.retrieve.NNretrieval.similarity.local.recommenders.InrecaLessIsBetter;
-import jcolibri.method.retrieve.NNretrieval.similarity.local.recommenders.McSherryLessIsBetter;
-import jcolibri.method.retrieve.NNretrieval.similarity.local.recommenders.McSherryMoreIsBetter;
 import jcolibri.method.retrieve.selection.SelectCases;
+import es.ucm.fdi.isbc.viviendas.representacion.Coordenada;
 import es.ucm.fdi.isbc.viviendas.representacion.DescripcionVivienda;
 
 
@@ -41,6 +39,7 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 	ArrayList<CBRCase> solucion  = new ArrayList<CBRCase>();
 	
 	SortedSet<String> ciudades = new TreeSet<String>(); 
+	Map<String,Coordenada> posicionCiudades = new HashMap<String,Coordenada>();
 
 	@Override
 	public void configure() throws ExecutionException {
@@ -84,22 +83,25 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		//Fijamos las funciones de similitud locales
 		simConfig.addMapping(new Attribute("localizacion",  DescripcionVivienda.class), new Equal());
 		simConfig.addMapping(new Attribute("precio", DescripcionVivienda.class), new Interval(10000));
+		simConfig.addMapping(new Attribute("coordenada", DescripcionVivienda.class),  new SimilitudCoordenadas(15));
 		
 		//simConfig.addMapping(new Attribute("superficie",  DescripcionVivienda.class), new McSherryMoreIsBetter(7,1));
 		//simConfig.addMapping(new Attribute("habitaciones",  DescripcionVivienda.class), new McSherryMoreIsBetter(0,0));
 		//simConfig.addMapping(new Attribute("banios", DescripcionVivienda.class), new McSherryMoreIsBetter(0,0));
-		//simConfig.addMapping(new Attribute("precio", DescripcionVivienda.class), new InrecaLessIsBetter(2000, 0.5));
-		//simConfig.addMapping(new Attribute("coordenada", DescripcionVivienda.class),  new Equal());
+		
+		
 		
 		//Es posible modificar el peso de cada atributo en la media ponderada
 		//Por defecto el peso es 1
+		simConfig.setWeight(new Attribute("localizacion", DescripcionVivienda.class), 2.0);
+		simConfig.setWeight(new Attribute("coordenada", DescripcionVivienda.class), 1.0);
 		simConfig.setWeight(new Attribute("precio", DescripcionVivienda.class), 0.02);
 		
 		//Ejecutamos la recuperacio por el vecino mas proximo
 		Collection<RetrievalResult> eval = NNScoringMethod.evaluateSimilarity(_caseBase.getCases(),  query, simConfig);
 		
 		//Seleccionamos los k mejores casos
-		eval = SelectCases.selectTopKRR(eval, 5);
+		eval = SelectCases.selectTopKRR(eval, 15);
 		
 		//Imprimimos el resultado del k-NN y obtenemos la lista de casos recuperados
 		Collection<CBRCase> casos = new ArrayList<CBRCase>();
@@ -152,6 +154,11 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		return ciudades;
 	}
 	
+	public Map<String,Coordenada> getPosicionCiudades(){
+		return posicionCiudades;
+	}
+
+	
 	private void getCiudades(Collection<CBRCase> casos){
 		
 		for(CBRCase caso : casos){
@@ -160,6 +167,8 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 			String url = descripcionVivienda.getUrl(); 
 			String[] split = url.split("/");
 			ciudades.add(split[4]);
+			
+			posicionCiudades.put(split[4], descripcionVivienda.getCoordenada());
 		}
 	}
 	

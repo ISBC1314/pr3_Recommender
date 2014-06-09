@@ -39,8 +39,6 @@ public class VistaPrincipal {
 	
 	private ViviendasRecomendador recomendador;
 	
-	
-	
 	//Datos formulario
 	private JComboBox<String> JComboBox_superficie;
 	private JComboBox<String> JComboBox_habitaciones;
@@ -66,12 +64,6 @@ public class VistaPrincipal {
 		frmIsbc.setBounds(100, 100, 1093,800);
 		frmIsbc.setVisible(true);
 		formularioInicial();
-		
-		
-		//String[] ciudades = recomendador.getCiudades().toArray(new String[recomendador.getCiudades().size()]);
-		//for(String ciudad : c)
-		//	System.out.println(ciudad.toString());
-		
 	}
 
 	/**
@@ -333,6 +325,11 @@ public class VistaPrincipal {
 			DescripcionVivienda des = new DescripcionVivienda(1);
 			des.setPrecio(precio);
 			des.setLocalizacion(ciudad);
+			des.setCoordenada(recomendador.getPosicionCiudades().get(ciudad));
+			System.out.println("Marina" +recomendador.getPosicionCiudades().get(ciudad));
+			System.out.println("Marina");
+			System.out.println("Marina");
+			System.out.println("Marina");
 			mostrarLista(recomendador.ejecutarConsulta(des));
 		}
 		//Valores iniciales vacios
