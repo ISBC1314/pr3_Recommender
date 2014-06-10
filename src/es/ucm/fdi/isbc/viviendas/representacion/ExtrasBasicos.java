@@ -227,7 +227,86 @@ public class ExtrasBasicos implements CaseComponent{
 		this.aireAcondicionado = aireAcondicionado;
 	}
 
-	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (aireAcondicionado ? 1231 : 1237);
+		result = prime * result + (amueblado ? 1231 : 1237);
+		result = prime * result + (armarios ? 1231 : 1237);
+		result = prime * result + (calefaccion ? 1231 : 1237);
+		result = prime * result + (cocinaOffice ? 1231 : 1237);
+		result = prime * result + (domotica ? 1231 : 1237);
+		result = prime * result + (electrodomesticos ? 1231 : 1237);
+		result = prime * result + (gresCeramica ? 1231 : 1237);
+		result = prime * result + (horno ? 1231 : 1237);
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + (internet ? 1231 : 1237);
+		result = prime * result + (lavadero ? 1231 : 1237);
+		result = prime * result + (lavadora ? 1231 : 1237);
+		result = prime * result + (microondas ? 1231 : 1237);
+		result = prime * result + (nevera ? 1231 : 1237);
+		result = prime * result + (parquet ? 1231 : 1237);
+		result = prime * result + (puertaBlindada ? 1231 : 1237);
+		result = prime * result + (suiteConBanio ? 1231 : 1237);
+		result = prime * result + (tv ? 1231 : 1237);
+		return result;
+	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ExtrasBasicos other = (ExtrasBasicos) obj;
+		if (aireAcondicionado != other.aireAcondicionado)
+			return false;
+		if (amueblado != other.amueblado)
+			return false;
+		if (armarios != other.armarios)
+			return false;
+		if (calefaccion != other.calefaccion)
+			return false;
+		if (cocinaOffice != other.cocinaOffice)
+			return false;
+		if (domotica != other.domotica)
+			return false;
+		if (electrodomesticos != other.electrodomesticos)
+			return false;
+		if (gresCeramica != other.gresCeramica)
+			return false;
+		if (horno != other.horno)
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (internet != other.internet)
+			return false;
+		if (lavadero != other.lavadero)
+			return false;
+		if (lavadora != other.lavadora)
+			return false;
+		if (microondas != other.microondas)
+			return false;
+		if (nevera != other.nevera)
+			return false;
+		if (parquet != other.parquet)
+			return false;
+		if (puertaBlindada != other.puertaBlindada)
+			return false;
+		if (suiteConBanio != other.suiteConBanio)
+			return false;
+		if (tv != other.tv)
+			return false;
+		return true;
+	}
+
+	
+	
 	
 }

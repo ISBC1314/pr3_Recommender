@@ -21,6 +21,7 @@ import jcolibri.cbrcore.CBRQuery;
 import jcolibri.cbrcore.Connector;
 import jcolibri.exception.ExecutionException;
 import jcolibri.extensions.recommendation.casesDisplay.DisplayCasesTableMethod;
+import jcolibri.extensions.recommendation.tabuList.TabuList;
 import jcolibri.method.retrieve.RetrievalResult;
 import jcolibri.method.retrieve.NNretrieval.NNConfig;
 import jcolibri.method.retrieve.NNretrieval.NNScoringMethod;
@@ -37,6 +38,8 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 	
 	/** CaseBase object */
 	CBRCaseBase _caseBase;
+	
+	TabuList tabuList  = new TabuList();
 	
 	ArrayList<CBRCase> solucion  = new ArrayList<CBRCase>();
 	
@@ -123,7 +126,7 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		Collection<RetrievalResult> eval = NNScoringMethod.evaluateSimilarity(_caseBase.getCases(),  query, simConfig);
 		
 		//Seleccionamos los k mejores casos
-		eval = SelectCases.selectTopKRR(eval, 30);
+		eval = SelectCases.selectTopKRR(eval, 10);
 		
 		//Imprimimos el resultado del k-NN y obtenemos la lista de casos recuperados
 		Collection<CBRCase> casos = new ArrayList<CBRCase>();
@@ -133,7 +136,8 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 			casos.add(nse.get_case());
 		}
 		
-		//Aqui se incluiria el codigo para adaptar la solucion
+		//Eliminamos los casos de la lista Tabú
+		casos = TabuList.removeTabuList(casos);
 		
 		//Solamente mostramos el resultado
 		DisplayCasesTableMethod.displayCasesInTableBasic(casos);
@@ -171,6 +175,21 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		}
 		
 		return solucion;
+	}
+	
+	public void anyadirAListaTabu(DescripcionVivienda des){
+		Collection<CBRCase> casos = _caseBase.getCases();
+
+		ArrayList<CBRCase> casosAEliminar = new ArrayList<CBRCase>();
+		for(CBRCase caso: casos){
+			DescripcionVivienda desCaso = (DescripcionVivienda) caso.getDescription();
+			if(desCaso.getId().equals(des.getId())){
+				casosAEliminar.add(caso);
+			}
+		}	
+		
+		TabuList.updateTabuList(casosAEliminar);
+		//_caseBase.forgetCases(casosAEliminar);
 	}
 	
 	public Set<String> getCiudades(){

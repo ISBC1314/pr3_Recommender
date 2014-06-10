@@ -138,6 +138,58 @@ public class ExtrasOtros implements CaseComponent {
 	public void setPiscina(boolean piscina) {
 		this.piscina = piscina;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (balcon ? 1231 : 1237);
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + (jardinPrivado ? 1231 : 1237);
+		result = prime * result + (patio ? 1231 : 1237);
+		result = prime * result + (piscina ? 1231 : 1237);
+		result = prime * result + (piscinaComunitaria ? 1231 : 1237);
+		result = prime * result + (terraza ? 1231 : 1237);
+		result = prime * result + (zonaComunitaria ? 1231 : 1237);
+		result = prime * result + (zonaDeportiva ? 1231 : 1237);
+		result = prime * result + (zonaInfantil ? 1231 : 1237);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ExtrasOtros other = (ExtrasOtros) obj;
+		if (balcon != other.balcon)
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (jardinPrivado != other.jardinPrivado)
+			return false;
+		if (patio != other.patio)
+			return false;
+		if (piscina != other.piscina)
+			return false;
+		if (piscinaComunitaria != other.piscinaComunitaria)
+			return false;
+		if (terraza != other.terraza)
+			return false;
+		if (zonaComunitaria != other.zonaComunitaria)
+			return false;
+		if (zonaDeportiva != other.zonaDeportiva)
+			return false;
+		if (zonaInfantil != other.zonaInfantil)
+			return false;
+		return true;
+	}
 	
 	
 }

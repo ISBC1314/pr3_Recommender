@@ -429,7 +429,7 @@ public class VistaPrincipal {
 			JButton_descartar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					JOptionPane.showMessageDialog (frmIsbc, "Casa descartada de la busqueda");
-					//TODO descartar descripcion vivienda en lista casos
+					recomendador.anyadirAListaTabu(des);
 					frmIsbc.getContentPane().add(JPanel_1);
 					frmIsbc.getContentPane().remove(JPanel_vistaVivienda);
 					SwingUtilities.updateComponentTreeUI(frmIsbc);

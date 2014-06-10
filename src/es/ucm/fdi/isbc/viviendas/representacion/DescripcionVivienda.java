@@ -210,5 +210,131 @@ public class DescripcionVivienda implements CaseComponent{
 		String[] split = url.split("/");
 		return (split[4]);	
 	}
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((banios == null) ? 0 : banios.hashCode());
+		result = prime * result + ((coordenada == null) ? 0 : coordenada.hashCode());
+		result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
+		result = prime * result + ((estado == null) ? 0 : estado.hashCode());
+		result = prime * result + ((extrasBasicos == null) ? 0 : extrasBasicos.hashCode());
+		result = prime * result + ((extrasFinca == null) ? 0 : extrasFinca.hashCode());
+		result = prime * result + ((extrasOtros == null) ? 0 : extrasOtros.hashCode());
+		result = prime * result + ((habitaciones == null) ? 0 : habitaciones.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((localizacion == null) ? 0 : localizacion.hashCode());
+		result = prime * result + ((precio == null) ? 0 : precio.hashCode());
+		result = prime * result + ((precioMedio == null) ? 0 : precioMedio.hashCode());
+		result = prime * result + ((precioZona == null) ? 0 : precioZona.hashCode());
+		result = prime * result + ((superficie == null) ? 0 : superficie.hashCode());
+		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
+		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
+		result = prime * result + ((url == null) ? 0 : url.hashCode());
+		result = prime * result + ((urlFoto == null) ? 0 : urlFoto.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		DescripcionVivienda other = (DescripcionVivienda) obj;
+		if (banios == null) {
+			if (other.banios != null)
+				return false;
+		} else if (!banios.equals(other.banios))
+			return false;
+		if (coordenada == null) {
+			if (other.coordenada != null)
+				return false;
+		} else if (!coordenada.equals(other.coordenada))
+			return false;
+		if (descripcion == null) {
+			if (other.descripcion != null)
+				return false;
+		} else if (!descripcion.equals(other.descripcion))
+			return false;
+		if (estado != other.estado)
+			return false;
+		if (extrasBasicos == null) {
+			if (other.extrasBasicos != null)
+				return false;
+		} else if (!extrasBasicos.equals(other.extrasBasicos))
+			return false;
+		if (extrasFinca == null) {
+			if (other.extrasFinca != null)
+				return false;
+		} else if (!extrasFinca.equals(other.extrasFinca))
+			return false;
+		if (extrasOtros == null) {
+			if (other.extrasOtros != null)
+				return false;
+		} else if (!extrasOtros.equals(other.extrasOtros))
+			return false;
+		if (habitaciones == null) {
+			if (other.habitaciones != null)
+				return false;
+		} else if (!habitaciones.equals(other.habitaciones))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (localizacion == null) {
+			if (other.localizacion != null)
+				return false;
+		} else if (!localizacion.equals(other.localizacion))
+			return false;
+		if (precio == null) {
+			if (other.precio != null)
+				return false;
+		} else if (!precio.equals(other.precio))
+			return false;
+		if (precioMedio == null) {
+			if (other.precioMedio != null)
+				return false;
+		} else if (!precioMedio.equals(other.precioMedio))
+			return false;
+		if (precioZona == null) {
+			if (other.precioZona != null)
+				return false;
+		} else if (!precioZona.equals(other.precioZona))
+			return false;
+		if (superficie == null) {
+			if (other.superficie != null)
+				return false;
+		} else if (!superficie.equals(other.superficie))
+			return false;
+		if (tipo != other.tipo)
+			return false;
+		if (titulo == null) {
+			if (other.titulo != null)
+				return false;
+		} else if (!titulo.equals(other.titulo))
+			return false;
+		if (url == null) {
+			if (other.url != null)
+				return false;
+		} else if (!url.equals(other.url))
+			return false;
+		if (urlFoto == null) {
+			if (other.urlFoto != null)
+				return false;
+		} else if (!urlFoto.equals(other.urlFoto))
+			return false;
+		return true;
+	}
+
+
+
 	
 }
