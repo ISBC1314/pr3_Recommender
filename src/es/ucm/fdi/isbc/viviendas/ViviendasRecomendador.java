@@ -108,9 +108,9 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		simConfig.setWeight(new Attribute("coordenada", DescripcionVivienda.class), 1.0);
 		simConfig.setWeight(new Attribute("precio", DescripcionVivienda.class), 0.02);
 		
-		simConfig.setWeight(new Attribute("superficie", DescripcionVivienda.class), 0.02);
-		simConfig.setWeight(new Attribute("habitaciones", DescripcionVivienda.class), 0.02);
-		simConfig.setWeight(new Attribute("banios", DescripcionVivienda.class), 0.02);
+		//simConfig.setWeight(new Attribute("superficie", DescripcionVivienda.class), 0.02);
+		//simConfig.setWeight(new Attribute("habitaciones", DescripcionVivienda.class), 0.02);
+		//simConfig.setWeight(new Attribute("banios", DescripcionVivienda.class), 0.02);
 		
 		//Ejecutamos la recuperacio por el vecino mas proximo
 		Collection<RetrievalResult> eval = NNScoringMethod.evaluateSimilarity(_caseBase.getCases(),  query, simConfig);
@@ -122,7 +122,7 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		Collection<CBRCase> casos = new ArrayList<CBRCase>();
 		System.out.println("Casos recuperados:");
 		for(RetrievalResult nse: eval){
-			System.out.println(nse);
+			//System.out.println(nse);
 			casos.add(nse.get_case());
 		}
 		
@@ -153,8 +153,8 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		//Crear objeto que almacena la consulta
 		CBRQuery query = new CBRQuery();
 		query.setDescription(des);
-		System.out.println(des.toString());
-		System.out.println(query.toString());
+		System.out.println("descripcion"+des.toString());
+		System.out.println("query"+query.toString());
 		
 		//Ejecutar el ciclo
 		try {

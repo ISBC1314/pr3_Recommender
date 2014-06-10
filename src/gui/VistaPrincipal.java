@@ -309,14 +309,12 @@ public class VistaPrincipal {
 		}
 		*/
 		if (JComboBox_precio.getSelectedIndex() != 0){
-			switch (JComboBox_precio.getSelectedIndex()){
-			case 1: des.setPrecio(100000);break;
-			case 2: des.setHabitaciones(450000);break;
-			case 3: des.setHabitaciones(850000);break;
-			case 4: des.setHabitaciones(1250000);break;
-			case 5: des.setHabitaciones(1500000);break;
-			}
+			des.setPrecio(getPrecioFromIndex(JComboBox_precio.getSelectedIndex()-1));
 		}
+		
+		des.setLocalizacion((String)JComboBox_localizacion.getSelectedItem());
+		des.setCoordenada(recomendador.getPosicionCiudades().get((String)JComboBox_localizacion.getSelectedItem()));
+		
 		if (JCheckBox_aire.isSelected() || JCheckBox_calefaccion.isSelected() || JCheckBox_amueblado.isSelected()){
 			ExtrasBasicos extrasBasicos = new ExtrasBasicos(0);
 			extrasBasicos.setAmueblado(JCheckBox_amueblado.isSelected());
@@ -338,6 +336,8 @@ public class VistaPrincipal {
 			extrasOtros.setPiscinaComunitaria(JCheckBox_piscina.isSelected());
 			des.setExtrasOtros(extrasOtros);
 		}
+		System.out.println("vp"+des.toString());
+		
 		return des;
 	}
 	
@@ -361,7 +361,7 @@ public class VistaPrincipal {
 		if (option == JOptionPane.OK_OPTION){
 			String ciudad_vivienda = (String) localizacion.getSelectedItem();
 			int precioMax_vivienda = getPrecioFromIndex(precio.getSelectedIndex());
-			System.out.println("ciudad="+ciudad_vivienda+"    precio="+precioMax_vivienda);
+			System.out.println("Consulta Inicial  ciudad="+ciudad_vivienda+"    precio="+precioMax_vivienda);
 			
 			ejecutaConsultaInicial(ciudad_vivienda,precioMax_vivienda);
 		}
