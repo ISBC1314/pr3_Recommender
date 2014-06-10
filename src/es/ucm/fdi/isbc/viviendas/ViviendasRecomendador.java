@@ -74,7 +74,8 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 	public CBRCaseBase preCycle() throws ExecutionException {
 		// Load cases from connector into the case base
 		_caseBase.init(_connector);		
-		_caseBase.learnCases(_connector.retrieveAllCases());
+		//_caseBase.learnCases(_connector.retrieveAllCases());
+		System.out.println("numero de casos cargados  " + _caseBase.getCases().size());
 		//Imprimir todos los casos de la base de casos
 		/*
 		Collection<CBRCase> cases = _caseBase.getCases();

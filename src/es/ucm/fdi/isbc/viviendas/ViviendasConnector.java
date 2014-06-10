@@ -16,8 +16,6 @@ import es.ucm.fdi.isbc.viviendas.representacion.DescripcionVivienda;
 import es.ucm.fdi.isbc.viviendas.representacion.SolucionVivienda;
 
 public class ViviendasConnector implements Connector {
-	
-	Set<String> ciudades = new HashSet<String>();
 
 	@Override
 	public void initFromXMLfile(URL file) throws InitializingException {
