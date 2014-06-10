@@ -1,4 +1,4 @@
-package es.ucm.fdi.isbc.viviendas;
+package es.ucm.fdi.isbc.viviendas.funcionessimilitud;
 
 import jcolibri.method.retrieve.NNretrieval.similarity.LocalSimilarityFunction;
 import es.ucm.fdi.isbc.viviendas.representacion.ExtrasFinca;

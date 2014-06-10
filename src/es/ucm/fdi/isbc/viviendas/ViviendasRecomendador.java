@@ -1,5 +1,10 @@
 package es.ucm.fdi.isbc.viviendas;
 
+import es.ucm.fdi.isbc.viviendas.funcionessimilitud.SimilitudCoordenadas;
+import es.ucm.fdi.isbc.viviendas.funcionessimilitud.SimilitudExtrasBasicos;
+import es.ucm.fdi.isbc.viviendas.funcionessimilitud.SimilitudExtrasFinca;
+import es.ucm.fdi.isbc.viviendas.funcionessimilitud.SimilitudExtrasOtros;
+import es.ucm.fdi.isbc.viviendas.funcionessimilitud.SimilitudSuperficie;
 import es.ucm.fdi.isbc.viviendas.representacion.Coordenada;
 import es.ucm.fdi.isbc.viviendas.representacion.DescripcionVivienda;
 import gui.VistaPrincipal;
@@ -74,14 +79,7 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 	public CBRCaseBase preCycle() throws ExecutionException {
 		// Load cases from connector into the case base
 		_caseBase.init(_connector);		
-		//_caseBase.learnCases(_connector.retrieveAllCases());
-		System.out.println("numero de casos cargados  " + _caseBase.getCases().size());
-		//Imprimir todos los casos de la base de casos
-		/*
-		Collection<CBRCase> cases = _caseBase.getCases();
-		for (CBRCase c : cases)
-			System.out.println(c);
-		*/
+
 		//Sacamos los nombres de las ciudades
 		getCiudades(_caseBase.getCases());
 		
@@ -190,7 +188,6 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		}	
 		
 		TabuList.updateTabuList(casosAEliminar);
-		//_caseBase.forgetCases(casosAEliminar);
 	}
 	
 	public Set<String> getCiudades(){

@@ -1,4 +1,4 @@
-package es.ucm.fdi.isbc.viviendas;
+package es.ucm.fdi.isbc.viviendas.funcionessimilitud;
 
 import es.ucm.fdi.isbc.viviendas.representacion.Coordenada;
 import jcolibri.exception.NoApplicableSimilarityFunctionException;
