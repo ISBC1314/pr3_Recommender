@@ -100,6 +100,9 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		simConfig.addMapping(new Attribute("habitaciones",  DescripcionVivienda.class), new Equal());
 		simConfig.addMapping(new Attribute("banios", DescripcionVivienda.class), new Equal());
 		
+		simConfig.addMapping(new Attribute("extrasOtros",  DescripcionVivienda.class), new SimilitudExtrasOtros());
+		simConfig.addMapping(new Attribute("extrasBasicos",  DescripcionVivienda.class), new SimilitudExtrasBasicos());
+		simConfig.addMapping(new Attribute("extrasFinca",  DescripcionVivienda.class), new SimilitudExtrasFinca());
 		
 		
 		//Es posible modificar el peso de cada atributo en la media ponderada
@@ -112,11 +115,15 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		simConfig.setWeight(new Attribute("habitaciones", DescripcionVivienda.class), 0.02);
 		simConfig.setWeight(new Attribute("banios", DescripcionVivienda.class), 0.02);
 		
+		simConfig.setWeight(new Attribute("extrasOtros", DescripcionVivienda.class), 0.05);
+		simConfig.setWeight(new Attribute("extrasBasicos", DescripcionVivienda.class), 0.05);
+		simConfig.setWeight(new Attribute("extrasFinca", DescripcionVivienda.class), 0.05);
+		
 		//Ejecutamos la recuperacio por el vecino mas proximo
 		Collection<RetrievalResult> eval = NNScoringMethod.evaluateSimilarity(_caseBase.getCases(),  query, simConfig);
 		
 		//Seleccionamos los k mejores casos
-		eval = SelectCases.selectTopKRR(eval, 15);
+		eval = SelectCases.selectTopKRR(eval, 30);
 		
 		//Imprimimos el resultado del k-NN y obtenemos la lista de casos recuperados
 		Collection<CBRCase> casos = new ArrayList<CBRCase>();
