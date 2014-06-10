@@ -38,17 +38,9 @@ public class SimilitudSuperficie implements LocalSimilarityFunction {
 		double v1 = i1.doubleValue();
 		double v2 = i2.doubleValue();
 		
+		if(v2>v1) return  (1 - ((double) Math.abs(v1 - v2) / _interval)) * 0.1;
+		else return  1 - ((double) Math.abs(v1 - v2) / _interval);
 		
-		System.out.print("valor 1:  "+v1);
-		System.out.print("   valor 2:  "+v2);
-		double similitud = 0;
-		
-		if(v2>v1) similitud = 0;
-		else similitud =  1 - ((double) Math.abs(v1 - v2) / _interval);
-		
-		System.out.println("   similitud:  "+ similitud);
-		System.out.println(" ");
-		return similitud;
 	}
 	
 	/** Applicable to Integer */

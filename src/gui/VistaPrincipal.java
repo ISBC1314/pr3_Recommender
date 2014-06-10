@@ -497,17 +497,17 @@ public class VistaPrincipal {
 		int precio = 0;
 		
 		switch (index) {
-        case 0:  precio = 250000;
+        case 0:  precio = 150000;
                  break;
-        case 1:  precio = 650000;
+        case 1:  precio = 500000;
                  break;
-        case 2:  precio = 1000000;
+        case 2:  precio = 900000;
                  break;
-        case 3:  precio = 1500000;
+        case 3:  precio = 1750000;
                  break;
-        case 4:  precio = 50000000;
+        case 4:  precio = 30000000;
         		 break;
-        default: precio = 650000;
+        default: precio = 450000;
                  break;
 		}
 		return precio;

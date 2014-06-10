@@ -93,12 +93,12 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		
 		//Fijamos las funciones de similitud locales
 		simConfig.addMapping(new Attribute("localizacion",  DescripcionVivienda.class), new Equal());
-		simConfig.addMapping(new Attribute("precio", DescripcionVivienda.class), new Interval(10000));
+		simConfig.addMapping(new Attribute("precio", DescripcionVivienda.class), new Interval(150000));
 		simConfig.addMapping(new Attribute("coordenada", DescripcionVivienda.class),  new SimilitudCoordenadas(15));
 		
 		simConfig.addMapping(new Attribute("superficie",  DescripcionVivienda.class), new SimilitudSuperficie(50));
 		simConfig.addMapping(new Attribute("habitaciones",  DescripcionVivienda.class), new Equal());
-		simConfig.addMapping(new Attribute("banios", DescripcionVivienda.class), new Interval(0));
+		simConfig.addMapping(new Attribute("banios", DescripcionVivienda.class), new Equal());
 		
 		
 		
