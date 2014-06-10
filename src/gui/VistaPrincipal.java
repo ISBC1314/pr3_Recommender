@@ -41,15 +41,13 @@ public class VistaPrincipal {
 	
 
 	
-	//Panel viviendas
+	//Paneles
 	private JPanel JPanel_viviendas;
 	private JList<DescripcionVivienda> JList_viviendas;
-	
-	private JPanel JPanel_vistaVivienda;
-	
+	private JPanel JPanel_1;
 	private JPanel JPanel_filtros;
-	
 	private JSplitPane JSplitPane_separador;
+	private JPanel JPanel_vistaVivienda;
 	
 	//Datos formulario
 	private JComboBox<String> JComboBox_superficie;
@@ -85,16 +83,22 @@ public class VistaPrincipal {
 	private void initialize() {
 		frmIsbc = new JFrame();
 		frmIsbc.setBounds(100, 100, 900, 500);
-		frmIsbc.getContentPane().setLayout(new MigLayout("", "[][min!][][][]", "[grow 600]"));
+		frmIsbc.getContentPane().setLayout(new MigLayout("", "[grow 400]", "[grow 600]"));
+		
+		JPanel_1 = new JPanel();
+		JPanel_1.setLayout(new MigLayout("", "[][min!][][][]", "[grow 600]"));
 		
 		JSplitPane_separador = new JSplitPane();
-		frmIsbc.getContentPane().add(JSplitPane_separador,"cell 2 0,grow");	
+		JPanel_1.add(JSplitPane_separador,"cell 2 0,grow");
+		
+		frmIsbc.getContentPane().add(JPanel_1);	
 		
 		
 		/*********** FORMULARIO DE BUSQUEDA **********/
 		JPanel_filtros = new JPanel();
 		JPanel_filtros.setBounds(0,0,100,500);
-		frmIsbc.getContentPane().add(JPanel_filtros, "cell 1 0,grow");
+		JPanel_1.add(JPanel_filtros, "cell 1 0,grow");
+		//frmIsbc.getContentPane().add(JPanel_filtros, "cell 1 0,grow");
 		JPanel_filtros.setLayout(new MigLayout("", "[40][20]", "[grow]"));
 		
 		//Superficie
@@ -253,7 +257,8 @@ public class VistaPrincipal {
 		});
 		
 		JScrollPane_listaViviendas = new JScrollPane(JList_viviendas);
-		frmIsbc.getContentPane().add(JScrollPane_listaViviendas,"cell 3 0,grow");
+		//frmIsbc.getContentPane().add(JScrollPane_listaViviendas,"cell 3 0,grow");
+		JPanel_1.add(JScrollPane_listaViviendas,"cell 3 0,grow");
 		
 		JSplitPane_separador.setLeftComponent(JPanel_filtros);
 		JSplitPane_separador.setRightComponent(JScrollPane_listaViviendas);	
@@ -261,7 +266,7 @@ public class VistaPrincipal {
 		/************** VISTA DE UNA VIVIENDA ****************/
 		JPanel_vistaVivienda = new JPanel();
 		JPanel_vistaVivienda.setVisible(false);
-		frmIsbc.getContentPane().add(JPanel_vistaVivienda,"cell 0 0 3 1");
+		//frmIsbc.getContentPane().add(JPanel_vistaVivienda);
 
 	}
 	
@@ -390,10 +395,8 @@ public class VistaPrincipal {
 		JButton_volver.setIcon(new ImageIcon("./imgs/icono_volver.png"));
 			JButton_volver.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					JPanel_vistaVivienda.setVisible(false);
-					JScrollPane_listaViviendas.setVisible(true);
-					JPanel_filtros.setVisible(true);
-					JSplitPane_separador.setVisible(true);
+					frmIsbc.getContentPane().add(JPanel_1);
+					frmIsbc.getContentPane().remove(JPanel_vistaVivienda);
 					SwingUtilities.updateComponentTreeUI(frmIsbc);
 				}
 			});
@@ -411,10 +414,8 @@ public class VistaPrincipal {
 				public void actionPerformed(ActionEvent e) {
 					JOptionPane.showMessageDialog (frmIsbc, "Casa descartada de la busqueda");
 					//TODO descartar descripcion vivienda en lista casos
-					JPanel_vistaVivienda.setVisible(false);
-					JScrollPane_listaViviendas.setVisible(true);
-					JPanel_filtros.setVisible(true);
-					JSplitPane_separador.setVisible(true);
+					frmIsbc.getContentPane().add(JPanel_1);
+					frmIsbc.getContentPane().remove(JPanel_vistaVivienda);
 					SwingUtilities.updateComponentTreeUI(frmIsbc);
 				}
 			});
@@ -424,10 +425,8 @@ public class VistaPrincipal {
 				public void actionPerformed(ActionEvent e) {
 					JOptionPane.showMessageDialog (frmIsbc, "Más casas similares");
 					//TODO Casas similares
-					JPanel_vistaVivienda.setVisible(false);
-					JScrollPane_listaViviendas.setVisible(true);
-					JPanel_filtros.setVisible(true);
-					JSplitPane_separador.setVisible(true);
+					frmIsbc.getContentPane().add(JPanel_1);
+					frmIsbc.getContentPane().remove(JPanel_vistaVivienda);
 					SwingUtilities.updateComponentTreeUI(frmIsbc);
 				}
 			});
@@ -471,12 +470,16 @@ public class VistaPrincipal {
 		JPanel_vistaVivienda.add(JLabel_extrasFinca);
 		JPanel_vistaVivienda.add(JLabel_extrasOtros);
 		
-		JPanel_vistaVivienda.setVisible(true);
-		JScrollPane_listaViviendas.setVisible(false);
-		JPanel_filtros.setVisible(false);
-		JSplitPane_separador.setVisible(false);
+		frmIsbc.getContentPane().remove(JPanel_1);
+		frmIsbc.getContentPane().add(JPanel_vistaVivienda);
+		//JPanel_vistaVivienda.setVisible(true);
+		//JPanel_1.setVisible(false);
+		//JScrollPane_listaViviendas.setVisible(false);
+		//JPanel_filtros.setVisible(false);
+		//JSplitPane_separador.setVisible(false);
 		
 		SwingUtilities.updateComponentTreeUI(frmIsbc);
+		frmIsbc.repaint();
 		
 	}
 
