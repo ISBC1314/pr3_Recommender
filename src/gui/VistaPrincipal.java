@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -72,7 +73,6 @@ public class VistaPrincipal {
 	public VistaPrincipal(ViviendasRecomendador viviendasRecomendador) {
 		recomendador = viviendasRecomendador;
 		initialize();
-		frmIsbc.setBounds(100, 100, 1093,800);
 		frmIsbc.setVisible(true);
 		formularioInicial();
 	}
@@ -82,21 +82,22 @@ public class VistaPrincipal {
 	 */
 	private void initialize() {
 		frmIsbc = new JFrame();
-		frmIsbc.setBounds(100, 100, 900, 500);
-		frmIsbc.getContentPane().setLayout(new MigLayout("", "[grow 400]", "[grow 600]"));
+		frmIsbc.setBounds(50,50,900,500);
+		frmIsbc.getContentPane().setLayout(new MigLayout("", "[][grow 500]", "[][grow 900]"));
 		
 		JPanel_1 = new JPanel();
-		JPanel_1.setLayout(new MigLayout("", "[][min!][][][]", "[grow 600]"));
+		JPanel_1.setLayout(new MigLayout("", "[][min!][][][]", "[][grow 600]"));
 		
 		JSplitPane_separador = new JSplitPane();
 		JPanel_1.add(JSplitPane_separador,"cell 2 0,grow");
 		
-		frmIsbc.getContentPane().add(JPanel_1);	
+		frmIsbc.getContentPane().add(JPanel_1,"cell 0 0 1 0");	
 		
 		
 		/*********** FORMULARIO DE BUSQUEDA **********/
 		JPanel_filtros = new JPanel();
-		JPanel_filtros.setBounds(0,0,100,500);
+		JPanel_filtros.setBounds(0,0,100,800);
+		JPanel_filtros.setBackground(Color.gray);
 		JPanel_1.add(JPanel_filtros, "cell 1 0,grow");
 		//frmIsbc.getContentPane().add(JPanel_filtros, "cell 1 0,grow");
 		JPanel_filtros.setLayout(new MigLayout("", "[40][20]", "[grow]"));
@@ -238,9 +239,12 @@ public class VistaPrincipal {
 		/********************** VISTA DE LISTA DE VIVIENDAS RESULTADO ********************/
 		
 		JPanel_viviendas = new JPanel();
-		JPanel_viviendas.setLayout(new MigLayout("", "[]", "[grow 600]"));
+		JPanel_viviendas.setLayout(new MigLayout("", "[grow 500]", "[grow 600]"));
+		//JPanel_viviendas.setBackground(Color.white);
+		//JPanel_viviendas.setBounds(10,0,300,500);
 		
 		JList_viviendas = new JList<DescripcionVivienda>();
+		JList_viviendas.setBackground(Color.white);
 		JList_viviendas.setModel(new DefaultListModel<DescripcionVivienda>());
 		JList_viviendas.setCellRenderer(new CellRendererViviendas());
 		JList_viviendas.addMouseListener(new MouseAdapter() {
@@ -251,6 +255,15 @@ public class VistaPrincipal {
 					if (index != -1){
 						DescripcionVivienda des = JList_viviendas.getModel().getElementAt(index);
 						mostrarVistaVivienda(des);
+					}
+				}
+			}
+			public void mouseEntered(MouseEvent e){
+				Object source = e.getSource();
+				if (source.equals(JList_viviendas)){
+					int index = JList_viviendas.getSelectedIndex();
+					if (index != -1){
+						JList_viviendas.setBackground(new Color(222,184,135));
 					}
 				}
 			}
@@ -382,17 +395,18 @@ public class VistaPrincipal {
 		}
 		//Valores iniciales vacios
 		else{
-			
+			//TODO valores iniciales(si selececciona cancelar)t
 		}
 	}
 	
 	
 	public void mostrarVistaVivienda(DescripcionVivienda des){
 		JPanel_vistaVivienda = new JPanel();
-		JPanel_vistaVivienda.setLayout(new MigLayout("","[200][500]","[50][50][50][50][50]"));
+		JPanel_vistaVivienda.setLayout(new MigLayout("","[200][200][100][100]","[50][50][50][50][50]"));
 		
 		JButton JButton_volver = new JButton("Volver");
-		JButton_volver.setIcon(new ImageIcon("./imgs/icono_volver.png"));
+		JButton_volver.setBounds(0,0,150,50);
+		JButton_volver.setIcon(new ImageIcon(new ImageIcon("./imgs/icono_volver.png").getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT)));
 			JButton_volver.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					frmIsbc.getContentPane().add(JPanel_1);
@@ -401,7 +415,8 @@ public class VistaPrincipal {
 				}
 			});
 		JButton JButton_comprar = new JButton ("Me la quedo");
-		JButton_comprar.setIcon(new ImageIcon("./imgs/icono_comprar.png"));
+		JButton_comprar.setBounds(0,0,150,50);
+		JButton_comprar.setIcon(new ImageIcon(new ImageIcon("./imgs/icono_comprar.png").getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT)));
 			JButton_comprar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					JOptionPane.showMessageDialog (frmIsbc, "Enhorabuena por su compra");
@@ -409,7 +424,8 @@ public class VistaPrincipal {
 				}
 			});
 		JButton JButton_descartar = new JButton("No me gusta");
-		JButton_descartar.setIcon(new ImageIcon("./imgs/icono_descartar.png"));
+		JButton_descartar.setBounds(0,0,150,50);
+		JButton_descartar.setIcon(new ImageIcon(new ImageIcon("./imgs/icono_descartar.png").getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT)));
 			JButton_descartar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					JOptionPane.showMessageDialog (frmIsbc, "Casa descartada de la busqueda");
@@ -420,7 +436,8 @@ public class VistaPrincipal {
 				}
 			});
 		JButton JButton_mas = new JButton("Otra como esta");
-		JButton_mas.setIcon(new ImageIcon("./imgs/icono_mas.png"));
+		JButton_mas.setBounds(0,0,150,50);
+		JButton_mas.setIcon(new ImageIcon(new ImageIcon("./imgs/icono_mas.png").getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT)));
 			JButton_descartar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					JOptionPane.showMessageDialog (frmIsbc, "Más casas similares");
@@ -437,38 +454,38 @@ public class VistaPrincipal {
 		JPanel_vistaVivienda.add(JButton_mas,"cell 0 6");
 		
 		ImageIcon icono = new ImageIcon("./imgs/icono_casa2.png");
-		icono = new ImageIcon(icono.getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT));
+		icono = new ImageIcon(icono.getImage().getScaledInstance(200, 200, Image.SCALE_DEFAULT));
 		JLabel JLabel_icono = new JLabel();
 		JLabel_icono.setIcon(icono);
 		JLabel JLabel_titulo = new JLabel(des.getTitulo());
-		JLabel JLabel_precio = new JLabel(des.getPrecio().toString());
-		JLabel JLabel_habitaciones = new JLabel (des.getHabitaciones().toString());
-		JLabel JLabel_banios = new JLabel (des.getBanios().toString());
-		JLabel JLabel_superficie = new JLabel (des.getSuperficie().toString());
+		JLabel JLabel_precio = new JLabel("Precio: "+des.getPrecio().toString());
+		JLabel JLabel_habitaciones = new JLabel ("Habitaciones: "+des.getHabitaciones().toString());
+		JLabel JLabel_banios = new JLabel ("Baños: "+des.getBanios().toString());
+		JLabel JLabel_superficie = new JLabel ("Superficie: "+des.getSuperficie().toString());
 		JLabel JLabel_descripcion = new JLabel (des.getDescripcion());
-		JLabel JLabel_estado = new JLabel (des.getEstado().toString());
-		JLabel JLabel_tipo = new JLabel (des.getTipo().toString());
-		JLabel JLabel_precioMedio = new JLabel (des.getPrecioMedio().toString());
-		JLabel JLabel_precioZona = new JLabel (des.getPrecioZona().toString());
+		JLabel JLabel_estado = new JLabel ("Estado: "+des.getEstado().toString());
+		JLabel JLabel_tipo = new JLabel ("Tipo de vivienda: "+des.getTipo().toString());
+		JLabel JLabel_precioMedio = new JLabel ("Precio medio: "+des.getPrecioMedio().toString());
+		JLabel JLabel_precioZona = new JLabel ("Precio zona: "+des.getPrecioZona().toString());
 
-		JLabel JLabel_extrasBasicos = new JLabel(des.getExtrasBasicos().writeString());
-		JLabel JLabel_extrasFinca = new JLabel(des.getExtrasFinca().writeString());
-		JLabel JLabel_extrasOtros = new JLabel(des.getExtrasOtros().writeString());
+		JLabel JLabel_extrasBasicos = new JLabel("Extras básicos: "+des.getExtrasBasicos().writeString());
+		JLabel JLabel_extrasFinca = new JLabel("Extras finca: "+des.getExtrasFinca().writeString());
+		JLabel JLabel_extrasOtros = new JLabel("Otros extras: "+des.getExtrasOtros().writeString());
 		
-		JPanel_vistaVivienda.add(JLabel_icono);
-		JPanel_vistaVivienda.add(JLabel_titulo);
-		JPanel_vistaVivienda.add(JLabel_precio);
-		JPanel_vistaVivienda.add(JLabel_habitaciones);
-		JPanel_vistaVivienda.add(JLabel_banios);
-		JPanel_vistaVivienda.add(JLabel_superficie);
-		JPanel_vistaVivienda.add(JLabel_descripcion);
-		JPanel_vistaVivienda.add(JLabel_estado);
-		JPanel_vistaVivienda.add(JLabel_tipo);
-		JPanel_vistaVivienda.add(JLabel_precioMedio);
-		JPanel_vistaVivienda.add(JLabel_precioZona);
-		JPanel_vistaVivienda.add(JLabel_extrasBasicos);
-		JPanel_vistaVivienda.add(JLabel_extrasFinca);
-		JPanel_vistaVivienda.add(JLabel_extrasOtros);
+		JPanel_vistaVivienda.add(JLabel_icono,"cell 1 0 1 1");
+		JPanel_vistaVivienda.add(JLabel_titulo,"cell 2 0");
+		JPanel_vistaVivienda.add(JLabel_precio,"cell 3 0");
+		JPanel_vistaVivienda.add(JLabel_habitaciones,"cell 2 1");
+		JPanel_vistaVivienda.add(JLabel_banios,"cell 2 2");
+		JPanel_vistaVivienda.add(JLabel_superficie,"cell 1 3");
+		JPanel_vistaVivienda.add(JLabel_estado,"cell 2 3");
+		JPanel_vistaVivienda.add(JLabel_tipo,"cell 3 3");
+		JPanel_vistaVivienda.add(JLabel_precioMedio,"cell 3 1");
+		JPanel_vistaVivienda.add(JLabel_precioZona,"cell 3 2");
+		JPanel_vistaVivienda.add(JLabel_extrasBasicos,"cell 1 4 3 4");
+		JPanel_vistaVivienda.add(JLabel_extrasFinca,"cell 1 5 3 5");
+		JPanel_vistaVivienda.add(JLabel_extrasOtros,"cell 1 6 3 6");
+		JPanel_vistaVivienda.add(JLabel_descripcion,"cell 1 7 3 9");
 		
 		frmIsbc.getContentPane().remove(JPanel_1);
 		frmIsbc.getContentPane().add(JPanel_vistaVivienda);
