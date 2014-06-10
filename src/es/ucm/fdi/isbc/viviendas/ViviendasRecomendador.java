@@ -23,6 +23,7 @@ import jcolibri.method.retrieve.NNretrieval.NNScoringMethod;
 import jcolibri.method.retrieve.NNretrieval.similarity.global.Average;
 import jcolibri.method.retrieve.NNretrieval.similarity.local.Equal;
 import jcolibri.method.retrieve.NNretrieval.similarity.local.Interval;
+import jcolibri.method.retrieve.NNretrieval.similarity.local.recommenders.McSherryMoreIsBetter;
 import jcolibri.method.retrieve.selection.SelectCases;
 import es.ucm.fdi.isbc.viviendas.representacion.Coordenada;
 import es.ucm.fdi.isbc.viviendas.representacion.DescripcionVivienda;
@@ -107,11 +108,15 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		simConfig.setWeight(new Attribute("coordenada", DescripcionVivienda.class), 1.0);
 		simConfig.setWeight(new Attribute("precio", DescripcionVivienda.class), 0.02);
 		
+		simConfig.setWeight(new Attribute("superficie", DescripcionVivienda.class), 0.02);
+		simConfig.setWeight(new Attribute("habitaciones", DescripcionVivienda.class), 0.02);
+		simConfig.setWeight(new Attribute("banios", DescripcionVivienda.class), 0.02);
+		
 		//Ejecutamos la recuperacio por el vecino mas proximo
 		Collection<RetrievalResult> eval = NNScoringMethod.evaluateSimilarity(_caseBase.getCases(),  query, simConfig);
 		
 		//Seleccionamos los k mejores casos
-		eval = SelectCases.selectTopKRR(eval, 15);
+		eval = SelectCases.selectTopKRR(eval, 7);
 		
 		//Imprimimos el resultado del k-NN y obtenemos la lista de casos recuperados
 		Collection<CBRCase> casos = new ArrayList<CBRCase>();
