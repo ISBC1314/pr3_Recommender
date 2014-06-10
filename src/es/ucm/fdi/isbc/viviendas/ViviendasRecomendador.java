@@ -96,9 +96,9 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		simConfig.addMapping(new Attribute("precio", DescripcionVivienda.class), new Interval(10000));
 		simConfig.addMapping(new Attribute("coordenada", DescripcionVivienda.class),  new SimilitudCoordenadas(15));
 		
-		//simConfig.addMapping(new Attribute("superficie",  DescripcionVivienda.class), new McSherryMoreIsBetter(7,1));
-		//simConfig.addMapping(new Attribute("habitaciones",  DescripcionVivienda.class), new McSherryMoreIsBetter(0,0));
-		//simConfig.addMapping(new Attribute("banios", DescripcionVivienda.class), new McSherryMoreIsBetter(0,0));
+		simConfig.addMapping(new Attribute("superficie",  DescripcionVivienda.class), new SimilitudSuperficie(50));
+		simConfig.addMapping(new Attribute("habitaciones",  DescripcionVivienda.class), new Equal());
+		simConfig.addMapping(new Attribute("banios", DescripcionVivienda.class), new Interval(0));
 		
 		
 		
@@ -108,19 +108,19 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		simConfig.setWeight(new Attribute("coordenada", DescripcionVivienda.class), 1.0);
 		simConfig.setWeight(new Attribute("precio", DescripcionVivienda.class), 0.02);
 		
-		//simConfig.setWeight(new Attribute("superficie", DescripcionVivienda.class), 0.02);
-		//simConfig.setWeight(new Attribute("habitaciones", DescripcionVivienda.class), 0.02);
-		//simConfig.setWeight(new Attribute("banios", DescripcionVivienda.class), 0.02);
+		simConfig.setWeight(new Attribute("superficie", DescripcionVivienda.class), 0.02);
+		simConfig.setWeight(new Attribute("habitaciones", DescripcionVivienda.class), 0.02);
+		simConfig.setWeight(new Attribute("banios", DescripcionVivienda.class), 0.02);
 		
 		//Ejecutamos la recuperacio por el vecino mas proximo
 		Collection<RetrievalResult> eval = NNScoringMethod.evaluateSimilarity(_caseBase.getCases(),  query, simConfig);
 		
 		//Seleccionamos los k mejores casos
-		eval = SelectCases.selectTopKRR(eval, 7);
+		eval = SelectCases.selectTopKRR(eval, 15);
 		
 		//Imprimimos el resultado del k-NN y obtenemos la lista de casos recuperados
 		Collection<CBRCase> casos = new ArrayList<CBRCase>();
-		System.out.println("Casos recuperados:");
+		//System.out.println("Casos recuperados:");
 		for(RetrievalResult nse: eval){
 			//System.out.println(nse);
 			casos.add(nse.get_case());
@@ -183,8 +183,20 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 			String[] split = url.split("/");
 			ciudades.add(split[4]);
 			
-			posicionCiudades.put(split[4], descripcionVivienda.getCoordenada());
+			
+			//Hacemos el punto medio de todas las coordenadas de una ciudad
+			if(posicionCiudades.containsKey(split[4])){
+				Coordenada c1 = posicionCiudades.get(split[4]);
+				posicionCiudades.remove(split[4]);
+				Coordenada c2 = descripcionVivienda.getCoordenada();
+				Coordenada puntoMedio = new Coordenada ((c1.getLatitud()+ c2.getLatitud())/2, (c1.getLongitud()+ c2.getLongitud())/2 );
+				posicionCiudades.put(split[4], puntoMedio);
+			}
+			else	
+				posicionCiudades.put(split[4], descripcionVivienda.getCoordenada());
 		}
+		
+		System.out.println(posicionCiudades.toString());
 	}
 	
 	
