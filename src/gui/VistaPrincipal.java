@@ -430,6 +430,9 @@ public class VistaPrincipal {
 				public void actionPerformed(ActionEvent e) {
 					JOptionPane.showMessageDialog (frmIsbc, "Casa descartada de la busqueda");
 					recomendador.anyadirAListaTabu(des);
+					//TODO borrar elemento lista
+					DefaultListModel<DescripcionVivienda> model = (DefaultListModel<DescripcionVivienda>) JList_viviendas.getModel();
+					model.removeElement(des);
 					frmIsbc.getContentPane().add(JPanel_1);
 					frmIsbc.getContentPane().remove(JPanel_vistaVivienda);
 					SwingUtilities.updateComponentTreeUI(frmIsbc);
