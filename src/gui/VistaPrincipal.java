@@ -83,10 +83,10 @@ public class VistaPrincipal {
 	private void initialize() {
 		frmIsbc = new JFrame();
 		frmIsbc.setBounds(50,50,900,500);
-		frmIsbc.getContentPane().setLayout(new MigLayout("", "[][grow 500]", "[][grow 900]"));
+		frmIsbc.getContentPane().setLayout(new MigLayout("", "[][grow 900]", "[][grow 500]"));
 		
 		JPanel_1 = new JPanel();
-		JPanel_1.setLayout(new MigLayout("", "[][min!][][][]", "[][grow 600]"));
+		JPanel_1.setLayout(new MigLayout("", "[200][5][grow 900]", "[][grow 600]"));
 		
 		JSplitPane_separador = new JSplitPane();
 		JPanel_1.add(JSplitPane_separador,"cell 2 0,grow");
@@ -98,7 +98,7 @@ public class VistaPrincipal {
 		JPanel_filtros = new JPanel();
 		JPanel_filtros.setBounds(0,0,100,800);
 		JPanel_filtros.setBackground(Color.gray);
-		JPanel_1.add(JPanel_filtros, "cell 1 0,grow");
+		JPanel_1.add(JPanel_filtros, "cell 0 0,grow");
 		//frmIsbc.getContentPane().add(JPanel_filtros, "cell 1 0,grow");
 		JPanel_filtros.setLayout(new MigLayout("", "[40][20]", "[grow]"));
 		
@@ -271,7 +271,7 @@ public class VistaPrincipal {
 		
 		JScrollPane_listaViviendas = new JScrollPane(JList_viviendas);
 		//frmIsbc.getContentPane().add(JScrollPane_listaViviendas,"cell 3 0,grow");
-		JPanel_1.add(JScrollPane_listaViviendas,"cell 3 0,grow");
+		JPanel_1.add(JScrollPane_listaViviendas,"cell 2 0,grow");
 		
 		JSplitPane_separador.setLeftComponent(JPanel_filtros);
 		JSplitPane_separador.setRightComponent(JScrollPane_listaViviendas);	
