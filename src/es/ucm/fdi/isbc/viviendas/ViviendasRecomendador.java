@@ -1,5 +1,9 @@
 package es.ucm.fdi.isbc.viviendas;
 
+import es.ucm.fdi.isbc.viviendas.representacion.Coordenada;
+import es.ucm.fdi.isbc.viviendas.representacion.DescripcionVivienda;
+import gui.VistaPrincipal;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -23,11 +27,7 @@ import jcolibri.method.retrieve.NNretrieval.NNScoringMethod;
 import jcolibri.method.retrieve.NNretrieval.similarity.global.Average;
 import jcolibri.method.retrieve.NNretrieval.similarity.local.Equal;
 import jcolibri.method.retrieve.NNretrieval.similarity.local.Interval;
-import jcolibri.method.retrieve.NNretrieval.similarity.local.recommenders.McSherryMoreIsBetter;
 import jcolibri.method.retrieve.selection.SelectCases;
-import es.ucm.fdi.isbc.viviendas.representacion.Coordenada;
-import es.ucm.fdi.isbc.viviendas.representacion.DescripcionVivienda;
-import gui.VistaPrincipal;
 
 
 public class ViviendasRecomendador implements StandardCBRApplication {

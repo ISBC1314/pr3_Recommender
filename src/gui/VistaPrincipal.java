@@ -400,7 +400,7 @@ public class VistaPrincipal {
 	}
 	
 	
-	public void mostrarVistaVivienda(DescripcionVivienda des){
+	public void mostrarVistaVivienda(final DescripcionVivienda des){
 		JPanel_vistaVivienda = new JPanel();
 		JPanel_vistaVivienda.setLayout(new MigLayout("","[200][200][100][100]","[50][50][50][50][50]"));
 		
@@ -438,10 +438,11 @@ public class VistaPrincipal {
 		JButton JButton_mas = new JButton("Otra como esta");
 		JButton_mas.setBounds(0,0,150,50);
 		JButton_mas.setIcon(new ImageIcon(new ImageIcon("./imgs/icono_mas.png").getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT)));
-			JButton_descartar.addActionListener(new ActionListener() {
+			JButton_mas.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					JOptionPane.showMessageDialog (frmIsbc, "Más casas similares");
-					//TODO Casas similares
+					recomendador.ejecutarConsulta(des);
+					System.out.println("boton pulsado");
 					frmIsbc.getContentPane().add(JPanel_1);
 					frmIsbc.getContentPane().remove(JPanel_vistaVivienda);
 					SwingUtilities.updateComponentTreeUI(frmIsbc);
