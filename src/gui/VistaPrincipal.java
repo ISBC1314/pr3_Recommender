@@ -220,23 +220,14 @@ public class VistaPrincipal {
 		//Botones
 		JPanel JPanel_botones = new JPanel();
 		JPanel_botones.setBackground(Color.gray);
-		JPanel_botones.setLayout(new MigLayout("","[]30[]","[]"));
+		JPanel_botones.setLayout(new MigLayout("","[]","[]"));
 		JPanel_filtros.add(JPanel_botones,"span");
 		//Boton buscar
 		JButton_buscar = new JButton("Buscar");
-		JPanel_botones.add(JButton_buscar,"cell 0 0");
+		JPanel_botones.add(JButton_buscar,"span");
 		JButton_buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actualizarLista(recomendador.ejecutarConsulta(getDescripcionVivienda()));
-			}
-		});
-		//Boton filtrar
-		JButton_filtrar = new JButton("Filtrar");
-		JPanel_botones.add(JButton_filtrar,"cell 1 0");
-		JButton_filtrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//TODO
-				//mostrarLista(recomendador.ejecutarFiltro(getDescripcionVivienda()));
 			}
 		});
 		

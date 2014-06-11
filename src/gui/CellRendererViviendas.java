@@ -61,7 +61,11 @@ public class CellRendererViviendas extends DefaultListCellRenderer{
 		JLabel_localizacion.setForeground(Color.black);
 		
 		//JLabel JLabel_descripcion = new JLabel (descripcion.getDescripcion().substring(0, 79)+"\n"+descripcion.getDescripcion().substring(80, 159));
-		String descrip = descripcion.getDescripcion().substring(0, 79) + "...";
+		String descrip = descripcion.getDescripcion();
+		if (descrip.length()>79)
+			descrip = descrip.substring(0,79) + "...";
+		else
+			descrip += "...";
 		JLabel JLabel_descripcion = new JLabel (descrip);
 		JLabel_descripcion.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		JLabel_descripcion.setForeground(Color.gray);
