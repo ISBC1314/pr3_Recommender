@@ -9,6 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,6 +21,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
@@ -233,6 +235,7 @@ public class VistaPrincipal {
 		JPanel_botones.add(JButton_filtrar,"cell 1 0");
 		JButton_filtrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//TODO
 				//mostrarLista(recomendador.ejecutarFiltro(getDescripcionVivienda()));
 			}
 		});
@@ -382,10 +385,14 @@ public class VistaPrincipal {
 	
 	public void mostrarVistaVivienda(final DescripcionVivienda des){
 		JPanel_vistaVivienda = new JPanel();
-		JPanel_vistaVivienda.setLayout(new MigLayout("","[200][200][100][100]","[50][50][50][50][50]"));
+		JPanel_vistaVivienda.setLayout(new MigLayout("","[200.00, grow]50[700.00, grow]","[]"));
+		
+		JPanel JPanel_botones = new JPanel();
+		JPanel_botones.setLayout(new MigLayout("","[]","[]50[]50[]50[]"));
+		JPanel_vistaVivienda.add(JPanel_botones,"cell 0 0");
 		
 		JButton JButton_volver = new JButton("Volver");
-		JButton_volver.setBounds(0,0,150,50);
+		//JButton_volver.setBounds(0,0,150,50);
 		JButton_volver.setIcon(new ImageIcon(new ImageIcon("./imgs/icono_volver.png").getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT)));
 			JButton_volver.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -395,7 +402,7 @@ public class VistaPrincipal {
 				}
 			});
 		JButton JButton_comprar = new JButton ("Me la quedo");
-		JButton_comprar.setBounds(0,0,150,50);
+		//JButton_comprar.setBounds(0,0,150,50);
 		JButton_comprar.setIcon(new ImageIcon(new ImageIcon("./imgs/icono_comprar.png").getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT)));
 			JButton_comprar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -404,7 +411,7 @@ public class VistaPrincipal {
 				}
 			});
 		JButton JButton_descartar = new JButton("No me gusta");
-		JButton_descartar.setBounds(0,0,150,50);
+		//JButton_descartar.setBounds(0,0,150,50);
 		JButton_descartar.setIcon(new ImageIcon(new ImageIcon("./imgs/icono_descartar.png").getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT)));
 			JButton_descartar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -418,7 +425,7 @@ public class VistaPrincipal {
 				}
 			});
 		JButton JButton_mas = new JButton("Otra como esta");
-		JButton_mas.setBounds(0,0,150,50);
+		//JButton_mas.setBounds(0,0,150,50);
 		JButton_mas.setIcon(new ImageIcon(new ImageIcon("./imgs/icono_mas.png").getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT)));
 			JButton_mas.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -431,44 +438,165 @@ public class VistaPrincipal {
 				}
 			});
 		
-		JPanel_vistaVivienda.add(JButton_volver,"cell 0 0");
-		JPanel_vistaVivienda.add(JButton_comprar,"cell 0 2");
-		JPanel_vistaVivienda.add(JButton_descartar,"cell 0 4");
-		JPanel_vistaVivienda.add(JButton_mas,"cell 0 6");
+		JPanel_botones.add(JButton_volver,"cell 0 0");
+		JPanel_botones.add(JButton_comprar,"cell 0 1");
+		JPanel_botones.add(JButton_descartar,"cell 0 2");
+		JPanel_botones.add(JButton_mas,"cell 0 3");
+		
+		JPanel JPanel_vivienda = new JPanel();
+		JPanel_vivienda.setBorder(BorderFactory.createLineBorder(Color.black));
+		JPanel_vivienda.setLayout(new MigLayout("","[]20[]","[]5[]8[]8[]10[]"));
+		JPanel_vistaVivienda.add(JPanel_vivienda,"cell 0 0");
 		
 		ImageIcon icono = new ImageIcon("./imgs/icono_casa2.png");
-		icono = new ImageIcon(icono.getImage().getScaledInstance(200, 200, Image.SCALE_DEFAULT));
+		icono = new ImageIcon(icono.getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
 		JLabel JLabel_icono = new JLabel();
 		JLabel_icono.setIcon(icono);
 		JLabel JLabel_titulo = new JLabel(des.getTitulo());
-		JLabel JLabel_precio = new JLabel("Precio: "+des.getPrecio().toString());
-		JLabel JLabel_habitaciones = new JLabel ("Habitaciones: "+des.getHabitaciones().toString());
-		JLabel JLabel_banios = new JLabel ("Baños: "+des.getBanios().toString());
-		JLabel JLabel_superficie = new JLabel ("Superficie: "+des.getSuperficie().toString());
-		JLabel JLabel_descripcion = new JLabel (des.getDescripcion());
-		JLabel JLabel_estado = new JLabel ("Estado: "+des.getEstado().toString());
-		JLabel JLabel_tipo = new JLabel ("Tipo de vivienda: "+des.getTipo().toString());
-		JLabel JLabel_precioMedio = new JLabel ("Precio medio: "+des.getPrecioMedio().toString());
-		JLabel JLabel_precioZona = new JLabel ("Precio zona: "+des.getPrecioZona().toString());
-
-		JLabel JLabel_extrasBasicos = new JLabel("Extras básicos: "+des.getExtrasBasicos().writeString());
-		JLabel JLabel_extrasFinca = new JLabel("Extras finca: "+des.getExtrasFinca().writeString());
-		JLabel JLabel_extrasOtros = new JLabel("Otros extras: "+des.getExtrasOtros().writeString());
+		JLabel_titulo.setForeground(new Color(3,168,158));
+		JLabel_titulo.setFont(new Font("Tahoma", Font.BOLD, 18));
 		
-		JPanel_vistaVivienda.add(JLabel_icono,"cell 1 0 1 1");
-		JPanel_vistaVivienda.add(JLabel_titulo,"cell 2 0");
-		JPanel_vistaVivienda.add(JLabel_precio,"cell 3 0");
-		JPanel_vistaVivienda.add(JLabel_habitaciones,"cell 2 1");
-		JPanel_vistaVivienda.add(JLabel_banios,"cell 2 2");
-		JPanel_vistaVivienda.add(JLabel_superficie,"cell 1 3");
-		JPanel_vistaVivienda.add(JLabel_estado,"cell 2 3");
-		JPanel_vistaVivienda.add(JLabel_tipo,"cell 3 3");
-		JPanel_vistaVivienda.add(JLabel_precioMedio,"cell 3 1");
-		JPanel_vistaVivienda.add(JLabel_precioZona,"cell 3 2");
-		JPanel_vistaVivienda.add(JLabel_extrasBasicos,"cell 1 4 3 4");
-		JPanel_vistaVivienda.add(JLabel_extrasFinca,"cell 1 5 3 5");
-		JPanel_vistaVivienda.add(JLabel_extrasOtros,"cell 1 6 3 6");
-		JPanel_vistaVivienda.add(JLabel_descripcion,"cell 1 7 3 9");
+		JPanel JPanel_datos = new JPanel();
+		JPanel_datos.setLayout(new MigLayout("","[left]8[left]100[right]8[right]","[]10[]5[]"));
+		
+		JLabel JLabel_localizacion = new JLabel(des.getLocalizacion().split("/")[0]);
+		JLabel_localizacion.setForeground(new Color(220,20,60));
+		JLabel_localizacion.setFont(new Font("Tahoma", Font.BOLD, 17));
+		JLabel JLabel_precio = new JLabel(des.getPrecio().toString());
+		JLabel_precio.setForeground(new Color(220,20,60));
+		JLabel_precio.setFont(new Font("Tahoma", Font.BOLD, 17));
+		
+		JLabel JLabel_thabitaciones = new JLabel ("Habitaciones:");
+		JLabel_thabitaciones.setForeground(new Color(46,139,87));
+		JLabel_thabitaciones.setFont(new Font("Tahoma", Font.BOLD, 15));
+		JLabel JLabel_habitaciones = new JLabel (des.getHabitaciones().toString());
+		JLabel_habitaciones.setForeground(new Color(131,139,131));
+		JLabel_habitaciones.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		JLabel JLabel_tbanios = new JLabel ("Baños:");
+		JLabel_tbanios.setForeground(new Color(46,139,87));
+		JLabel_tbanios.setFont(new Font("Tahoma", Font.BOLD, 15));
+		JLabel JLabel_banios = new JLabel (des.getBanios().toString());
+		JLabel_banios.setForeground(new Color(131,139,131));
+		JLabel_banios.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		JLabel JLabel_tprecioMedio = new JLabel ("Precio medio:");
+		JLabel_tprecioMedio.setForeground(new Color(46,139,87));
+		JLabel_tprecioMedio.setFont(new Font("Tahoma", Font.BOLD, 15));
+		JLabel JLabel_precioMedio = new JLabel (des.getPrecioMedio().toString());
+		JLabel_precioMedio.setForeground(new Color(131,139,131));
+		JLabel_precioMedio.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		JLabel JLabel_tprecioZona = new JLabel ("Precio zona:");
+		JLabel_tprecioZona.setForeground(new Color(46,139,87));
+		JLabel_tprecioZona.setFont(new Font("Tahoma", Font.BOLD, 15));
+		JLabel JLabel_precioZona = new JLabel (des.getPrecioZona().toString());
+		JLabel_precioZona.setForeground(new Color(131,139,131));
+		JLabel_precioZona.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
+		JPanel_datos.add(JLabel_localizacion,"cell 0 0,span 2");
+		JPanel_datos.add(JLabel_precio,"cell 2 0,span 2");
+		JPanel_datos.add(JLabel_thabitaciones,"cell 0 1");
+		JPanel_datos.add(JLabel_habitaciones,"cell 1 1");
+		JPanel_datos.add(JLabel_tbanios,"cell 0 2");
+		JPanel_datos.add(JLabel_banios,"cell 1 2");
+		JPanel_datos.add(JLabel_tprecioMedio,"cell 2 1");
+		JPanel_datos.add(JLabel_precioMedio,"cell 3 1");
+		JPanel_datos.add(JLabel_tprecioZona,"cell 2 2");
+		JPanel_datos.add(JLabel_precioZona,"cell 3 2");
+		
+		
+		JPanel JPanel_datos2 = new JPanel();
+		JPanel_datos2.setLayout(new MigLayout("","80[]10[]40[]10[]40[]10[]","[]"));
+		
+		JLabel JLabel_tsuperficie = new JLabel ("Superficie:");
+		JLabel_tsuperficie.setForeground(new Color(46,139,87));
+		JLabel_tsuperficie.setFont(new Font("Tahoma", Font.BOLD, 15));
+		JLabel JLabel_superficie = new JLabel (des.getSuperficie().toString());
+		JLabel_superficie.setForeground(new Color(131,139,131));
+		JLabel_superficie.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		JLabel JLabel_testado = new JLabel ("Estado:");
+		JLabel_testado.setForeground(new Color(46,139,87));
+		JLabel_testado.setFont(new Font("Tahoma", Font.BOLD, 15));
+		JLabel JLabel_estado = new JLabel (des.getEstado().toString());
+		JLabel_estado.setForeground(new Color(131,139,131));
+		JLabel_estado.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		JLabel JLabel_ttipo = new JLabel ("Tipo vivienda:");
+		JLabel_ttipo.setForeground(new Color(46,139,87));
+		JLabel_ttipo.setFont(new Font("Tahoma", Font.BOLD, 15));
+		JLabel JLabel_tipo = new JLabel (des.getTipo().toString());
+		JLabel_tipo.setForeground(new Color(131,139,131));
+		JLabel_tipo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
+		JPanel_datos2.add(JLabel_tsuperficie,"cell 0 0");
+		JPanel_datos2.add(JLabel_superficie,"cell 1 0");
+		JPanel_datos2.add(JLabel_testado,"cell 2 0");
+		JPanel_datos2.add(JLabel_estado,"cell 3 0");
+		JPanel_datos2.add(JLabel_ttipo,"cell 4 0");
+		JPanel_datos2.add(JLabel_tipo,"cell 5 0");
+		
+		JPanel JPanel_extras = new JPanel();
+		JPanel_extras.setLayout(new MigLayout("","[]","[]3[]7[]3[]7[]3[]"));
+		
+		JLabel JLabel_textrasBasicos = new JLabel ("Extras básicos:");
+		JLabel_textrasBasicos.setForeground(new Color(46,139,87));
+		JLabel_textrasBasicos.setFont(new Font("Tahoma", Font.BOLD, 15));
+		JLabel JLabel_extrasBasicos = new JLabel (des.getExtrasBasicos().writeString().substring(0, des.getExtrasBasicos().writeString().length()-2));
+		JLabel_extrasBasicos.setForeground(new Color(131,139,131));
+		JLabel_extrasBasicos.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		JLabel JLabel_textrasFinca = new JLabel ("Extras finca:");
+		JLabel_textrasFinca.setForeground(new Color(46,139,87));
+		JLabel_textrasFinca.setFont(new Font("Tahoma", Font.BOLD, 15));
+		JLabel JLabel_extrasFinca = new JLabel (des.getExtrasFinca().writeString().substring(0, des.getExtrasFinca().writeString().length()-2));
+		JLabel_extrasFinca.setForeground(new Color(131,139,131));
+		JLabel_extrasFinca.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		JLabel JLabel_textrasOtros = new JLabel ("Otros extras:");
+		JLabel_textrasOtros.setForeground(new Color(46,139,87));
+		JLabel_textrasOtros.setFont(new Font("Tahoma", Font.BOLD, 15));
+		JLabel JLabel_extrasOtros = new JLabel (des.getExtrasOtros().writeString().substring(0, des.getExtrasOtros().writeString().length()-2));
+		JLabel_extrasOtros.setForeground(new Color(131,139,131));
+		JLabel_extrasOtros.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
+		JPanel_extras.add(JLabel_textrasBasicos,"cell 0 0");
+		JPanel_extras.add(JLabel_extrasBasicos,"cell 0 1");
+		JPanel_extras.add(JLabel_textrasFinca,"cell 0 2");
+		JPanel_extras.add(JLabel_extrasFinca,"cell 0 3");
+		JPanel_extras.add(JLabel_textrasOtros,"cell 0 4");
+		JPanel_extras.add(JLabel_extrasOtros,"cell 0 5");
+		
+		JPanel JPanel_descripcion = new JPanel();
+		JPanel_descripcion.setLayout(new MigLayout("","[]","[]3[]"));
+		
+		JLabel JLabel_tdescripcion = new JLabel ("Descripcion:");
+		JLabel_tdescripcion.setForeground(new Color(46,139,87));
+		JLabel_tdescripcion.setFont(new Font("Tahoma", Font.BOLD, 15));
+		String aux = des.getDescripcion();
+		String label = "";
+		while (aux.length() > 80){
+			label += aux.substring(0, 80);
+			label +="\n";
+			aux = aux.substring(80);
+		}
+		label += aux;
+		JTextArea JTextArea_descripcion = new JTextArea();
+		JTextArea_descripcion.setText(label);
+		JTextArea_descripcion.setForeground(new Color(131,139,131));
+		JTextArea_descripcion.setOpaque(false);
+		JTextArea_descripcion.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		/*
+		JLabel JLabel_descripcion = new JLabel(label);
+		JLabel_descripcion.setForeground(new Color(131,139,131));
+		JLabel_descripcion.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		*/
+		JPanel_descripcion.add(JLabel_tdescripcion,"cell 0 0");
+		JPanel_descripcion.add(JTextArea_descripcion,"cell 0 1");
+		//JPanel_descripcion.add(JLabel_descripcion,"cell 0 1");
+		
+		//JLabel JLabel_descripcion = new JLabel (des.getDescripcion());
+		
+		JPanel_vivienda.add(JLabel_icono,"cell 0 0 0 2");
+		JPanel_vivienda.add(JLabel_titulo,"cell 1 0");
+		JPanel_vivienda.add(JPanel_datos,"cell 1 1,wrap");
+		JPanel_vivienda.add(JPanel_datos2,"span,wrap");
+		JPanel_vivienda.add(JPanel_extras,"span,wrap");
+		JPanel_vivienda.add(JPanel_descripcion,"span");
 		
 		frmIsbc.getContentPane().remove(JPanel_1);
 		frmIsbc.getContentPane().add(JPanel_vistaVivienda);
