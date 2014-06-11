@@ -20,7 +20,6 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
@@ -43,11 +42,9 @@ public class VistaPrincipal {
 
 	
 	//Paneles
-	private JPanel JPanel_viviendas;
 	private JList<DescripcionVivienda> JList_viviendas;
 	private JPanel JPanel_1;
 	private JPanel JPanel_filtros;
-	private JSplitPane JSplitPane_separador;
 	private JPanel JPanel_vistaVivienda;
 	
 	//Datos formulario
@@ -83,153 +80,157 @@ public class VistaPrincipal {
 	private void initialize() {
 		frmIsbc = new JFrame();
 		frmIsbc.setBounds(50,50,900,500);
-		frmIsbc.getContentPane().setLayout(new MigLayout("", "[][grow 900]", "[][grow 500]"));
 		
 		JPanel_1 = new JPanel();
-		JPanel_1.setLayout(new MigLayout("", "[200][5][grow 900]", "[][grow 600]"));
-		
-		JSplitPane_separador = new JSplitPane();
-		JPanel_1.add(JSplitPane_separador,"cell 2 0,grow");
-		
-		frmIsbc.getContentPane().add(JPanel_1,"cell 0 0 1 0");	
+		JPanel_1.setLayout(new MigLayout("", "[10.00,grow][300.00,grow][10.00,grow][600.00,grow][]", "[grow 500]"));
+		frmIsbc.getContentPane().add(JPanel_1);	
 		
 		
 		/*********** FORMULARIO DE BUSQUEDA **********/
+		
 		JPanel_filtros = new JPanel();
-		JPanel_filtros.setBounds(0,0,100,800);
 		JPanel_filtros.setBackground(Color.gray);
-		JPanel_1.add(JPanel_filtros, "cell 0 0,grow");
-		//frmIsbc.getContentPane().add(JPanel_filtros, "cell 1 0,grow");
-		JPanel_filtros.setLayout(new MigLayout("", "[40][20]", "[grow]"));
+		JPanel_1.add(JPanel_filtros,"cell 1 0,grow");
+		JPanel_filtros.setLayout(new MigLayout("", "[150]23[127]", "[][][][][]30[]30[]"));
 		
 		//Superficie
 		JLabel JLabel_superficie = new JLabel("Superficie:");
 		JLabel_superficie.setHorizontalAlignment(SwingConstants.CENTER);
 		JLabel_superficie.setFont(new Font("Tahoma", Font.BOLD, 12));
+		JLabel_superficie.setForeground(new Color(224,238,238));
 		JPanel_filtros.add(JLabel_superficie, "cell 0 0");		    
 		String[] superficies = {"Indiferente","Desde 50m\u00B2","Desde 100m\u00B2","Desde 150m\u00B2","Desde 200m\u00B2","Desde 250m\u00B2" };
 		JComboBox_superficie = new JComboBox<String>(superficies);
 		JComboBox_superficie.setSelectedIndex(0);
 		JPanel_filtros.add(JComboBox_superficie,"cell 1 0");
-		
 		//Habitaciones
 		JLabel JLabel_habitaciones = new JLabel("Habitaciones:");
 		JLabel_habitaciones.setHorizontalAlignment(SwingConstants.CENTER);
 		JLabel_habitaciones.setFont(new Font("Tahoma", Font.BOLD, 12));
+		JLabel_habitaciones.setForeground(new Color(224,238,238));
 		JPanel_filtros.add(JLabel_habitaciones, "cell 0 1");		    
 		String[] habitaciones = {"Indiferente","1","2","3","4","Más de 4" };
 		JComboBox_habitaciones = new JComboBox<String>(habitaciones);
 		JComboBox_habitaciones.setSelectedIndex(0);
 		JPanel_filtros.add(JComboBox_habitaciones,"cell 1 1");
-		
 		//Baños
 		JLabel JLabel_banios = new JLabel("Baños:");
 		JLabel_banios.setHorizontalAlignment(SwingConstants.CENTER);
 		JLabel_banios.setFont(new Font("Tahoma", Font.BOLD, 12));
+		JLabel_banios.setForeground(new Color(224,238,238));
 		JPanel_filtros.add(JLabel_banios, "cell 0 2");		    
 		String[] banios = {"Indiferente","1","2","Más de 2" };
 		JComboBox_banios = new JComboBox<String>(banios);
 		JComboBox_banios.setSelectedIndex(0);
 		JPanel_filtros.add(JComboBox_banios,"cell 1 2");
-		
 		//Precio
 		JLabel JLabel_precio = new JLabel("Precio:");
 		JLabel_precio.setHorizontalAlignment(SwingConstants.CENTER);
 		JLabel_precio.setFont(new Font("Tahoma", Font.BOLD, 12));
+		JLabel_precio.setForeground(new Color(224,238,238));
 		JPanel_filtros.add(JLabel_precio, "cell 0 3");
 		String[] precios = {"Indiferente","Menos de 250.000\u20AC","Entre 250.000\u20AC y 650.000\u20AC","Entre 650.000\u20AC y 1.000.000\u20AC","Entre 1.000.000\u20AC y 1.500.000\u20AC","M\u00E1s 1.500.000\u20AC"};
 		JComboBox_precio = new JComboBox<String>(precios);
 		JComboBox_precio.setSelectedIndex(0);
 		JPanel_filtros.add(JComboBox_precio,"cell 1 3");
-		
 		//Localizacion
 		JLabel JLabel_localizacion = new JLabel("Localización:");
 		JLabel_localizacion.setHorizontalAlignment(SwingConstants.CENTER);
 		JLabel_localizacion.setFont(new Font("Tahoma", Font.BOLD, 12));
+		JLabel_localizacion.setForeground(new Color(224,238,238));
 		JPanel_filtros.add(JLabel_localizacion, "cell 0 4");
 		JComboBox_localizacion = new JComboBox<String>();
 		for (String ciudad : recomendador.getCiudades())
 			JComboBox_localizacion.addItem(ciudad);
 		JComboBox_localizacion.setSelectedIndex(0);
-		JPanel_filtros.add(JComboBox_localizacion,"cell 1 4");
+		JPanel_filtros.add(JComboBox_localizacion,"wrap");
 		
-		//Estado
-		/*
-		JLabel JLabel_estado = new JLabel("Localización:");
-		JLabel_estado.setHorizontalAlignment(SwingConstants.CENTER);
-		JLabel_estado.setFont(new Font("Tahoma", Font.BOLD, 12));
-		JPanel_filtros.add(JLabel_estado, "cell 0 5");
-		String[] estados = {"Indiferente","Muy bien","Reformado","Casinuevo","Bien","Areformar"};
-		JComboBox_estado = new JComboBox<String>(estados);
-		JComboBox_estado.setSelectedIndex(0);
-		JPanel_filtros.add(JComboBox_estado,"cell 1 5");
-		*/
 		//Extras
 		JPanel JPanel_extras = new JPanel();
-		JPanel_filtros.add(JPanel_extras, "cell 0 6 1 6,grow");
-		JPanel_extras.setBorder(new TitledBorder(null, "Extras",TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		JPanel_extras.setLayout(new MigLayout("", "[75.00,grow][25.00,grow][grow]", "[grow]"));
+		JPanel_filtros.add(JPanel_extras, "span");
+		JPanel_extras.setBackground(Color.gray);
+		JPanel_extras.setBorder(new TitledBorder(null, "Extras",TitledBorder.LEADING, TitledBorder.TOP, null, new Color(224,238,238)));
+		JPanel_extras.setLayout(new MigLayout("", "[150.00]20[30.00][]", "[]"));
 		//Amueblado
 		JLabel JLabel_amueblado = new JLabel("Amueblado:");
 		JLabel_amueblado.setHorizontalAlignment(SwingConstants.CENTER);
 		JLabel_amueblado.setFont(new Font("Tahoma", Font.BOLD, 12));
-		JPanel_extras.add(JLabel_amueblado, "cell 0 0");		    
+		JLabel_amueblado.setForeground(new Color(202,255,112));
+		JPanel_extras.add(JLabel_amueblado, "cell 0 0");	
 		JCheckBox_amueblado = new JCheckBox();
+		JCheckBox_amueblado.setBackground(Color.gray);
 		JPanel_extras.add(JCheckBox_amueblado,"cell 1 0");
 		//Ascensor
 		JLabel JLabel_ascensor = new JLabel("Ascensor:");
 		JLabel_ascensor.setHorizontalAlignment(SwingConstants.CENTER);
 		JLabel_ascensor.setFont(new Font("Tahoma", Font.BOLD, 12));
+		JLabel_ascensor.setForeground(new Color(202,255,112));
 		JPanel_extras.add(JLabel_ascensor, "cell 0 1");		    
 		JCheckBox_ascensor = new JCheckBox();
+		JCheckBox_ascensor.setBackground(Color.gray);
 		JPanel_extras.add(JCheckBox_ascensor,"cell 1 1");
 		//Garaje
 		JLabel JLabel_garaje = new JLabel("Garaje:");
 		JLabel_garaje.setHorizontalAlignment(SwingConstants.CENTER);
 		JLabel_garaje.setFont(new Font("Tahoma", Font.BOLD, 12));
+		JLabel_garaje.setForeground(new Color(202,255,112));
 		JPanel_extras.add(JLabel_garaje, "cell 0 2");		    
 		JCheckBox_garaje = new JCheckBox();
+		JCheckBox_garaje.setBackground(Color.gray);
 		JPanel_extras.add(JCheckBox_garaje,"cell 1 2");
 		//Calefaccion
 		JLabel JLabel_calefaccion = new JLabel("Calefaccion:");
 		JLabel_calefaccion.setHorizontalAlignment(SwingConstants.CENTER);
 		JLabel_calefaccion.setFont(new Font("Tahoma", Font.BOLD, 12));
+		JLabel_calefaccion.setForeground(new Color(202,255,112));
 		JPanel_extras.add(JLabel_calefaccion, "cell 0 3");		    
 		JCheckBox_calefaccion = new JCheckBox();
+		JCheckBox_calefaccion.setBackground(Color.gray);
 		JPanel_extras.add(JCheckBox_calefaccion,"cell 1 3");
 		//Aire acondicionado
 		JLabel JLabel_aire = new JLabel("Aire acondicionado:");
 		JLabel_aire.setHorizontalAlignment(SwingConstants.CENTER);
 		JLabel_aire.setFont(new Font("Tahoma", Font.BOLD, 12));
+		JLabel_aire.setForeground(new Color(202,255,112));
 		JPanel_extras.add(JLabel_aire, "cell 0 4");		    
 		JCheckBox_aire = new JCheckBox();
+		JCheckBox_aire.setBackground(Color.gray);
 		JPanel_extras.add(JCheckBox_aire,"cell 1 4");
 		//Terraza
 		JLabel JLabel_terraza = new JLabel("Terraza:");
 		JLabel_terraza.setHorizontalAlignment(SwingConstants.CENTER);
 		JLabel_terraza.setFont(new Font("Tahoma", Font.BOLD, 12));
+		JLabel_terraza.setForeground(new Color(202,255,112));
 		JPanel_extras.add(JLabel_terraza, "cell 0 5");		    
 		JCheckBox_terraza = new JCheckBox();
+		JCheckBox_terraza.setBackground(Color.gray);
 		JPanel_extras.add(JCheckBox_terraza,"cell 1 5");
 		//Piscina
 		JLabel JLabel_piscina = new JLabel("Piscina:");
 		JLabel_piscina.setHorizontalAlignment(SwingConstants.CENTER);
 		JLabel_piscina.setFont(new Font("Tahoma", Font.BOLD, 12));
+		JLabel_piscina.setForeground(new Color(202,255,112));
 		JPanel_extras.add(JLabel_piscina, "cell 0 6");		    
 		JCheckBox_piscina = new JCheckBox();
+		JCheckBox_piscina.setBackground(Color.gray);
 		JPanel_extras.add(JCheckBox_piscina,"cell 1 6");
 		
-		//Botón buscar
+		//Botones
+		JPanel JPanel_botones = new JPanel();
+		JPanel_botones.setBackground(Color.gray);
+		JPanel_botones.setLayout(new MigLayout("","[]30[]","[]"));
+		JPanel_filtros.add(JPanel_botones,"span");
+		//Boton buscar
 		JButton_buscar = new JButton("Buscar");
-		JPanel_filtros.add(JButton_buscar,"cell 0 6");
+		JPanel_botones.add(JButton_buscar,"cell 0 0");
 		JButton_buscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actualizarLista(recomendador.ejecutarConsulta(getDescripcionVivienda()));
 			}
 		});
-		
+		//Boton filtrar
 		JButton_filtrar = new JButton("Filtrar");
-		JPanel_filtros.add(JButton_filtrar,"cell 1 6");
+		JPanel_botones.add(JButton_filtrar,"cell 1 0");
 		JButton_filtrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//mostrarLista(recomendador.ejecutarFiltro(getDescripcionVivienda()));
@@ -238,13 +239,7 @@ public class VistaPrincipal {
 		
 		/********************** VISTA DE LISTA DE VIVIENDAS RESULTADO ********************/
 		
-		JPanel_viviendas = new JPanel();
-		JPanel_viviendas.setLayout(new MigLayout("", "[grow 500]", "[grow 600]"));
-		//JPanel_viviendas.setBackground(Color.white);
-		//JPanel_viviendas.setBounds(10,0,300,500);
-		
 		JList_viviendas = new JList<DescripcionVivienda>();
-		JList_viviendas.setBackground(Color.white);
 		JList_viviendas.setModel(new DefaultListModel<DescripcionVivienda>());
 		JList_viviendas.setCellRenderer(new CellRendererViviendas());
 		JList_viviendas.addMouseListener(new MouseAdapter() {
@@ -258,27 +253,13 @@ public class VistaPrincipal {
 					}
 				}
 			}
-			public void mouseEntered(MouseEvent e){
-				Object source = e.getSource();
-				if (source.equals(JList_viviendas)){
-					int index = JList_viviendas.getSelectedIndex();
-					if (index != -1){
-						JList_viviendas.setBackground(new Color(222,184,135));
-					}
-				}
-			}
 		});
 		
 		JScrollPane_listaViviendas = new JScrollPane(JList_viviendas);
-		//frmIsbc.getContentPane().add(JScrollPane_listaViviendas,"cell 3 0,grow");
-		JPanel_1.add(JScrollPane_listaViviendas,"cell 2 0,grow");
-		
-		JSplitPane_separador.setLeftComponent(JPanel_filtros);
-		JSplitPane_separador.setRightComponent(JScrollPane_listaViviendas);	
+		JPanel_1.add(JScrollPane_listaViviendas,"cell 3 0 3 5,grow");
 		
 		/************** VISTA DE UNA VIVIENDA ****************/
 		JPanel_vistaVivienda = new JPanel();
-		JPanel_vistaVivienda.setVisible(false);
 		//frmIsbc.getContentPane().add(JPanel_vistaVivienda);
 
 	}
@@ -373,7 +354,9 @@ public class VistaPrincipal {
 		int option = JOptionPane.showConfirmDialog(null, options, "Parámetros iniciales", JOptionPane.OK_CANCEL_OPTION);
 		if (option == JOptionPane.OK_OPTION){
 			String ciudad_vivienda = (String) localizacion.getSelectedItem();
+			JComboBox_localizacion.setSelectedIndex(localizacion.getSelectedIndex());
 			int precioMax_vivienda = getPrecioFromIndex(precio.getSelectedIndex());
+			JComboBox_precio.setSelectedIndex(precio.getSelectedIndex());
 			System.out.println("Consulta Inicial  ciudad="+ciudad_vivienda+"    precio="+precioMax_vivienda);
 			
 			ejecutaConsultaInicial(ciudad_vivienda,precioMax_vivienda);
@@ -386,16 +369,13 @@ public class VistaPrincipal {
 	
 	public void ejecutaConsultaInicial(String ciudad, int precio){
 		//Valores introducidos en el formulario inicial
+		//sino formulario vacio
 		if (!ciudad.equals("") && precio != -1){
 			DescripcionVivienda des = new DescripcionVivienda(1);
 			des.setPrecio(precio);
 			des.setLocalizacion(ciudad);
 			des.setCoordenada(recomendador.getPosicionCiudades().get(ciudad));
 			actualizarLista(recomendador.ejecutarConsulta(des));
-		}
-		//Valores iniciales vacios
-		else{
-			//TODO valores iniciales(si selececciona cancelar)t
 		}
 	}
 	
@@ -430,7 +410,6 @@ public class VistaPrincipal {
 				public void actionPerformed(ActionEvent e) {
 					JOptionPane.showMessageDialog (frmIsbc, "Casa descartada de la busqueda");
 					recomendador.anyadirAListaTabu(des);
-					//TODO borrar elemento lista
 					DefaultListModel<DescripcionVivienda> model = (DefaultListModel<DescripcionVivienda>) JList_viviendas.getModel();
 					model.removeElement(des);
 					frmIsbc.getContentPane().add(JPanel_1);
@@ -444,7 +423,7 @@ public class VistaPrincipal {
 			JButton_mas.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					JOptionPane.showMessageDialog (frmIsbc, "Más casas similares");
-					recomendador.ejecutarConsulta(des);
+					actualizarLista(recomendador.ejecutarConsulta(des));
 					System.out.println("boton pulsado");
 					frmIsbc.getContentPane().add(JPanel_1);
 					frmIsbc.getContentPane().remove(JPanel_vistaVivienda);
@@ -493,14 +472,8 @@ public class VistaPrincipal {
 		
 		frmIsbc.getContentPane().remove(JPanel_1);
 		frmIsbc.getContentPane().add(JPanel_vistaVivienda);
-		//JPanel_vistaVivienda.setVisible(true);
-		//JPanel_1.setVisible(false);
-		//JScrollPane_listaViviendas.setVisible(false);
-		//JPanel_filtros.setVisible(false);
-		//JSplitPane_separador.setVisible(false);
 		
 		SwingUtilities.updateComponentTreeUI(frmIsbc);
-		frmIsbc.repaint();
 		
 	}
 
@@ -510,7 +483,7 @@ public class VistaPrincipal {
 		for (int i=0;i<casos.size();i++)
 			model.addElement((DescripcionVivienda) casos.get(i).getDescription());
 		SwingUtilities.updateComponentTreeUI(frmIsbc);
-		
+		//frmIsbc.repaint();
 	}
 	
 	public int getPrecioFromIndex(int index){

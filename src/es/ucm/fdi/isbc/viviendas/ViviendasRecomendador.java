@@ -25,7 +25,6 @@ import jcolibri.cbrcore.CBRCaseBase;
 import jcolibri.cbrcore.CBRQuery;
 import jcolibri.cbrcore.Connector;
 import jcolibri.exception.ExecutionException;
-import jcolibri.extensions.recommendation.casesDisplay.DisplayCasesTableMethod;
 import jcolibri.extensions.recommendation.tabuList.TabuList;
 import jcolibri.method.retrieve.RetrievalResult;
 import jcolibri.method.retrieve.NNretrieval.NNConfig;
@@ -139,7 +138,7 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		casos = TabuList.removeTabuList(casos);
 		
 		//Solamente mostramos el resultado
-		DisplayCasesTableMethod.displayCasesInTableBasic(casos);
+		//DisplayCasesTableMethod.displayCasesInTableBasic(casos);
 		
 		//Guardamos la solucion en su atributo
 		solucion = (ArrayList<CBRCase>) casos;
