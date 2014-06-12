@@ -143,7 +143,7 @@ public class VistaPrincipal {
 		JComboBox_localizacion = new JComboBox<String>();
 		for (String ciudad : recomendador.getCiudades())
 			JComboBox_localizacion.addItem(ciudad);
-		JComboBox_localizacion.setSelectedIndex(0);
+		//JComboBox_localizacion.setSelectedIndex(0);
 		JPanel_filtros.add(JComboBox_localizacion,"wrap");
 		
 		//Extras
