@@ -19,7 +19,8 @@ public class Main {
 			
 		} catch (Exception e)
 		{
-			org.apache.commons.logging.LogFactory.getLog(ViviendasRecomendador.class).error(e);
+			e.printStackTrace();
+			//org.apache.commons.logging.LogFactory.getLog(ViviendasRecomendador.class).error(e);
 		}
 		
 		

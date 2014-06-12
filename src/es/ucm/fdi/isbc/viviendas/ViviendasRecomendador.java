@@ -169,7 +169,8 @@ public class ViviendasRecomendador implements StandardCBRApplication {
 		try {
 			cycle(query);
 		} catch (Exception ex) {
-			org.apache.commons.logging.LogFactory.getLog(ViviendasRecomendador.class).error(ex);
+			ex.printStackTrace();
+			//org.apache.commons.logging.LogFactory.getLog(ViviendasRecomendador.class).error(ex);
 		}
 		
 		return solucion;

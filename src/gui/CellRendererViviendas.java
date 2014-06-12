@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 import es.ucm.fdi.isbc.viviendas.representacion.DescripcionVivienda;
 
-
+@SuppressWarnings("serial")
 public class CellRendererViviendas extends DefaultListCellRenderer{
 
 	public Component getListCellRendererComponent(JList<?> list, Object value,int index, boolean isSelected, boolean hasFocus) {

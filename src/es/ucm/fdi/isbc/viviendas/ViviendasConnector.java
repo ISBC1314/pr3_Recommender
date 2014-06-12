@@ -5,8 +5,6 @@ import java.io.FileReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
 import jcolibri.cbrcore.CBRCase;
 import jcolibri.cbrcore.CaseBaseFilter;

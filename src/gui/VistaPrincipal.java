@@ -57,7 +57,6 @@ public class VistaPrincipal {
 	private JComboBox<String> JComboBox_localizacion;
 	//private JComboBox<String> JComboBox_estado;
 	private JButton JButton_buscar;
-	private JButton JButton_filtrar;
 	private JCheckBox JCheckBox_piscina;
 	private JCheckBox JCheckBox_terraza;
 	private JCheckBox JCheckBox_aire;
