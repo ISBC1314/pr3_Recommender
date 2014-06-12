@@ -528,21 +528,21 @@ public class VistaPrincipal {
 		JLabel JLabel_textrasBasicos = new JLabel ("Extras básicos:");
 		JLabel_textrasBasicos.setForeground(new Color(46,139,87));
 		JLabel_textrasBasicos.setFont(new Font("Tahoma", Font.BOLD, 15));
-		JLabel JLabel_extrasBasicos = new JLabel (des.getExtrasBasicos().writeString().substring(0, des.getExtrasBasicos().writeString().length()-2));
+		JLabel JLabel_extrasBasicos = new JLabel (des.getExtrasBasicos().writeString());
 		JLabel_extrasBasicos.setForeground(new Color(131,139,131));
-		JLabel_extrasBasicos.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		JLabel_extrasBasicos.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		JLabel JLabel_textrasFinca = new JLabel ("Extras finca:");
 		JLabel_textrasFinca.setForeground(new Color(46,139,87));
 		JLabel_textrasFinca.setFont(new Font("Tahoma", Font.BOLD, 15));
-		JLabel JLabel_extrasFinca = new JLabel (des.getExtrasFinca().writeString().substring(0, des.getExtrasFinca().writeString().length()-2));
+		JLabel JLabel_extrasFinca = new JLabel (des.getExtrasFinca().writeString());
 		JLabel_extrasFinca.setForeground(new Color(131,139,131));
-		JLabel_extrasFinca.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		JLabel_extrasFinca.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		JLabel JLabel_textrasOtros = new JLabel ("Otros extras:");
 		JLabel_textrasOtros.setForeground(new Color(46,139,87));
 		JLabel_textrasOtros.setFont(new Font("Tahoma", Font.BOLD, 15));
-		JLabel JLabel_extrasOtros = new JLabel (des.getExtrasOtros().writeString().substring(0, des.getExtrasOtros().writeString().length()-2));
+		JLabel JLabel_extrasOtros = new JLabel (des.getExtrasOtros().writeString());
 		JLabel_extrasOtros.setForeground(new Color(131,139,131));
-		JLabel_extrasOtros.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		JLabel_extrasOtros.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JPanel_extras.add(JLabel_textrasBasicos,"cell 0 0");
 		JPanel_extras.add(JLabel_extrasBasicos,"cell 0 1");
